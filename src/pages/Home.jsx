@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { useCountdown } from '../hooks/useCountdown'
 
-const START = import.meta.env.VITE_CHALLENGE_START || '2025-04-20T00:00:00+09:00'
-const END   = import.meta.env.VITE_CHALLENGE_END   || '2025-05-11T23:59:59+09:00'
+const START = import.meta.env.VITE_CHALLENGE_START || '2026-04-20T00:00:00+09:00'
+const END   = import.meta.env.VITE_CHALLENGE_END   || '2026-05-11T23:59:59+09:00'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ export default function Home() {
         {/* ── Hero ── */}
         <div className="space-y-3">
           <p className="text-xs font-semibold tracking-[0.15em] uppercase text-zinc-400">
-            Apr 20 – May 11, 2025
+            Apr 20 – May 11, 2026
           </p>
           <h1 className="text-3xl font-semibold tracking-tight leading-tight">
             Streak Challenge
