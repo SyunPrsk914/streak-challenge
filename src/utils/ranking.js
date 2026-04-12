@@ -25,7 +25,7 @@ export function compareUsers(a, b) {
     const vb = sb[i]?.streak ?? -1
     if (va !== vb) return vb - va
   }
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 3; i++) {
     const ta = sa[i]?.timeMs ?? Infinity
     const tb = sb[i]?.timeMs ?? Infinity
     if (ta !== tb) return ta - tb
