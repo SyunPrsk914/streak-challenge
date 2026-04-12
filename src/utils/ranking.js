@@ -20,17 +20,32 @@ export function compareUsers(a, b) {
   const sa = rankSort(a.attempts)
   const sb = rankSort(b.attempts)
 
+  // 1-3: Compare streaks at each rank
   for (let i = 0; i < 3; i++) {
     const va = sa[i]?.streak ?? -1
     const vb = sb[i]?.streak ?? -1
     if (va !== vb) return vb - va
   }
+
+  // 4-6: For each streak rank, compare the FASTEST time among attempts
+  // that achieved that exact streak value
   for (let i = 0; i < 3; i++) {
-    const ta = sa[i]?.timeMs ?? Infinity
-    const tb = sb[i]?.timeMs ?? Infinity
+    const streakVal = sa[i]?.streak
+    if (streakVal == null) break
+
+    const ta = fastestTimeForStreak(a.attempts, streakVal)
+    const tb = fastestTimeForStreak(b.attempts, streakVal)
     if (ta !== tb) return ta - tb
   }
+
   return 0
+}
+
+/** Fastest time among all attempts that achieved exactly this streak */
+function fastestTimeForStreak(attempts, streak) {
+  const matching = attempts.filter(a => a.streak === streak)
+  if (!matching.length) return Infinity
+  return Math.min(...matching.map(a => a.timeMs))
 }
 
 /**
