@@ -236,9 +236,10 @@ function FireIcon() {
 
 function catStyle(cat) {
   return {
-    advanced: 'bg-violet-100 text-violet-700',
-    pro:      'bg-amber-100  text-amber-700',
-    trivia:   'bg-sky-100    text-sky-700',
-    basic:    'bg-zinc-100   text-zinc-600',
+    basic:        'bg-zinc-100   text-zinc-600',
+    intermediate: 'bg-blue-100   text-blue-700',
+    advanced:     'bg-violet-100 text-violet-700',
+    pro:          'bg-amber-100  text-amber-700',
+    trivia:       'bg-sky-100    text-sky-700',
   }[cat] ?? 'bg-zinc-100 text-zinc-600'
 }
