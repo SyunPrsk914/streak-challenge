@@ -39,10 +39,9 @@ export function compareUsers(a, b) {
  */
 export function bestAttemptIndex(attempts) {
   if (!attempts?.length) return -1
-  return attempts.reduce((best, cur, i) => {
-    const cmp = compareUsers({ attempts: [cur] }, { attempts: [attempts[best]] })
-    return cmp < 0 ? i : best
-  }, 0)
+  const sorted = rankSort(attempts)
+  const best = sorted[0]
+  return attempts.findIndex(a => a.attempt === best.attempt)
 }
 
 /** ms → "M:SS" */
