@@ -29,7 +29,7 @@ export default function Layout({ children, narrow = true }) {
 
       {/* ── Footer ── */}
       <footer className="border-t border-zinc-100 py-5 text-center text-xs text-zinc-400 font-medium tracking-wide">
-        Streak Challenge &nbsp;·&nbsp; Apr 20 – May 11, 2025
+        Streak Challenge &nbsp;·&nbsp; Apr 20 – May 11, 2026
       </footer>
 
     </div>
