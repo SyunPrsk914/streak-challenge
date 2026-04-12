@@ -1,0 +1,102 @@
+[
+  {
+    "id": "q001", "category": "advanced",
+    "question": "Which AWS service lets you run containers without managing any servers?",
+    "choices": ["Amazon EC2", "AWS Fargate", "AWS Lambda", "Amazon ECS"],
+    "answer": 1
+  },
+  {
+    "id": "q002", "category": "advanced",
+    "question": "In Kubernetes, which object ensures a specified number of pod replicas are always running?",
+    "choices": ["DaemonSet", "StatefulSet", "ReplicaSet", "Job"],
+    "answer": 2
+  },
+  {
+    "id": "q003", "category": "advanced",
+    "question": "Which HTTP status code means the server understood the request but refuses to authorize it?",
+    "choices": ["401 Unauthorized", "403 Forbidden", "404 Not Found", "429 Too Many Requests"],
+    "answer": 1
+  },
+  {
+    "id": "q004", "category": "advanced",
+    "question": "What is the time complexity of searching a balanced binary search tree?",
+    "choices": ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+    "answer": 2
+  },
+  {
+    "id": "q005", "category": "advanced",
+    "question": "Which design pattern defines a one-to-many dependency so all dependents are notified on state change?",
+    "choices": ["Strategy", "Decorator", "Observer", "Facade"],
+    "answer": 2
+  },
+  {
+    "id": "q006", "category": "pro",
+    "question": "What does the CAP theorem state cannot be simultaneously guaranteed in a distributed system?",
+    "choices": [
+      "Consistency, Availability, and Partition tolerance",
+      "Concurrency, Atomicity, and Performance",
+      "Caching, Authentication, and Persistence",
+      "Consistency, Atomicity, and Persistence"
+    ],
+    "answer": 0
+  },
+  {
+    "id": "q007", "category": "pro",
+    "question": "In a B-tree of order m, what is the maximum number of keys a single node can hold?",
+    "choices": ["m", "m − 1", "2m", "2m − 1"],
+    "answer": 3
+  },
+  {
+    "id": "q008", "category": "trivia",
+    "question": "What year was the first public release of Python?",
+    "choices": ["1989", "1991", "1994", "1995"],
+    "answer": 1
+  },
+  {
+    "id": "q009", "category": "trivia",
+    "question": "Which company originally developed the Go programming language?",
+    "choices": ["Microsoft", "Apple", "Google", "Meta"],
+    "answer": 2
+  },
+  {
+    "id": "q010", "category": "trivia",
+    "question": "What does 'Linux' combine with 'Linus'?",
+    "choices": ["MINIX", "Unix", "Xenix", "Lynx"],
+    "answer": 0
+  },
+  {
+    "id": "q011", "category": "basic",
+    "question": "What does DNS stand for?",
+    "choices": ["Data Network Service", "Domain Name System", "Dynamic Naming Structure", "Distributed Node System"],
+    "answer": 1
+  },
+  {
+    "id": "q012", "category": "basic",
+    "question": "Which of the following is NOT a primitive JavaScript type?",
+    "choices": ["undefined", "boolean", "float", "symbol"],
+    "answer": 2
+  },
+  {
+    "id": "q013", "category": "basic",
+    "question": "What is the default port for HTTPS?",
+    "choices": ["80", "8080", "443", "22"],
+    "answer": 2
+  },
+  {
+    "id": "q014", "category": "basic",
+    "question": "In version control, what does 'git stash' do?",
+    "choices": [
+      "Permanently deletes uncommitted changes",
+      "Temporarily saves uncommitted changes",
+      "Merges the current branch with main",
+      "Creates a new branch from HEAD"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "q015", "category": "basic",
+    "question": "Which protocol is commonly used to retrieve emails from a mail server?",
+    "choices": ["SMTP", "FTP", "IMAP", "HTTP"],
+    "answer": 2
+  }
+]

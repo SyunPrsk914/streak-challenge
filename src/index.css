@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100dvh;
+    background: #ffffff;
+    color: #18181b;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+
+  /* ─── Buttons ───────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-content-center justify-center
+           gap-2 px-5 py-3 rounded-xl font-medium text-sm
+           border transition-all duration-150 cursor-pointer
+           select-none outline-none font-sans
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-zinc-900 text-white border-zinc-900
+           hover:bg-zinc-700 hover:border-zinc-700
+           active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn bg-white text-zinc-700 border-zinc-200
+           hover:border-zinc-400 hover:bg-zinc-50
+           active:scale-[0.98];
+  }
+  .btn-full { @apply w-full; }
+
+  /* ─── Choice buttons (quiz) ──────────────────────────────── */
+  .choice {
+    @apply w-full text-left px-5 py-4 rounded-xl
+           border border-zinc-200 bg-white
+           font-medium text-sm text-zinc-800 leading-snug
+           hover:border-zinc-400 hover:bg-zinc-50
+           transition-all duration-100 cursor-pointer select-none
+           disabled:cursor-not-allowed;
+  }
+  .choice-selected { @apply border-zinc-900 bg-zinc-50; }
+  .choice-correct  { @apply !border-emerald-500 !bg-emerald-50 !text-emerald-800; }
+  .choice-wrong    { @apply !border-rose-500   !bg-rose-50   !text-rose-800; }
+  .choice-reveal   { @apply !border-emerald-400 !bg-emerald-50/70 !text-emerald-700; }
+
+  /* ─── Cards ──────────────────────────────────────────────── */
+  .card {
+    @apply bg-white border border-zinc-200 rounded-2xl;
+  }
+}
