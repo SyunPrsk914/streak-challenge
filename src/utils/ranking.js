@@ -1,18 +1,26 @@
 /* ─────────────────────────────────────────────────────────────
    ranking.js
    Tiebreak rules (in order):
-     1. Best streak  DESC
-     2. 2nd streak   DESC  (if 1st equal)
-     3. 3rd streak   DESC  (if 2nd equal)
-     4. Time of best attempt ASC  (faster = better)
-     5. Time of 2nd attempt  ASC  (if still equal)
+     1. Best streak DESC
+     2. 2nd-best streak DESC  (if 1st equal)
+     3. 3rd-best streak DESC  (if 2nd equal)
+     4. Fastest time among attempts that achieved the best streak
+     5. Fastest time among attempts that achieved the 2nd streak
+     6. Fastest time among attempts that achieved the 3rd streak
    ───────────────────────────────────────────────────────────── */
 
-/** Sort one player's attempts: streak desc, then time asc */
+/** Sort one player's attempts: streak desc, then timeMs asc */
 function rankSort(attempts) {
   return [...attempts].sort((a, b) =>
     b.streak !== a.streak ? b.streak - a.streak : a.timeMs - b.timeMs
   )
+}
+
+/** Fastest timeMs among all attempts that achieved exactly this streak value */
+function fastestTimeForStreak(attempts, streakVal) {
+  const matching = attempts.filter(a => a.streak === streakVal)
+  if (!matching.length) return Infinity
+  return Math.min(...matching.map(a => a.timeMs))
 }
 
 /** Compare two players {name, attempts:[]}. Returns <0 if a ranks higher. */
@@ -20,19 +28,17 @@ export function compareUsers(a, b) {
   const sa = rankSort(a.attempts)
   const sb = rankSort(b.attempts)
 
-  // 1-3: Compare streaks at each rank
+  // Steps 1–3: compare streak values at each rank position
   for (let i = 0; i < 3; i++) {
     const va = sa[i]?.streak ?? -1
     const vb = sb[i]?.streak ?? -1
     if (va !== vb) return vb - va
   }
 
-  // 4-6: For each streak rank, compare the FASTEST time among attempts
-  // that achieved that exact streak value
+  // Steps 4–6: streaks all equal — compare fastest time for each streak rank
   for (let i = 0; i < 3; i++) {
     const streakVal = sa[i]?.streak
     if (streakVal == null) break
-
     const ta = fastestTimeForStreak(a.attempts, streakVal)
     const tb = fastestTimeForStreak(b.attempts, streakVal)
     if (ta !== tb) return ta - tb
@@ -41,16 +47,9 @@ export function compareUsers(a, b) {
   return 0
 }
 
-/** Fastest time among all attempts that achieved exactly this streak */
-function fastestTimeForStreak(attempts, streak) {
-  const matching = attempts.filter(a => a.streak === streak)
-  if (!matching.length) return Infinity
-  return Math.min(...matching.map(a => a.timeMs))
-}
-
 /**
- * Return the index (0-based) of the "best" attempt within a player's
- * attempt array (already in chronological order 1,2,3).
+ * Return the index (0-based, in original chronological order) of the
+ * "best" attempt for highlighting on the leaderboard.
  */
 export function bestAttemptIndex(attempts) {
   if (!attempts?.length) return -1
@@ -67,19 +66,13 @@ export function formatTime(ms) {
 }
 
 /**
- * Parse the raw CSV text exported from Google Sheets and return
- * a ranked array of player objects.
+ * Parse CSV text from Google Sheets into a ranked array of player objects.
  *
- * Expected sheet columns (row 1 = header, ignored):
+ * Sheet columns (row 1 = header, skipped):
  *   Name | Attempt | Streak | Time (M:SS)
- *
- * Example rows:
- *   Alice | 1 | 12 | 2:34
- *   Alice | 2 |  7 | 1:10
- *   Bob   | 1 | 15 | 4:02
  */
 export function parseSheetCSV(csvText) {
-  const lines = csvText.trim().split('\n').slice(1) // skip header
+  const lines = csvText.trim().split('\n').slice(1)
   const map   = {}
 
   for (const raw of lines) {
@@ -95,7 +88,6 @@ export function parseSheetCSV(csvText) {
     map[name].attempts.push({ attempt, streak, timeMs })
   }
 
-  // Sort each player's own attempts chronologically
   for (const p of Object.values(map)) {
     p.attempts.sort((a, b) => a.attempt - b.attempt)
   }
