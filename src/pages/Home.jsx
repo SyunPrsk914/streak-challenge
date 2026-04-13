@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
+import { useState } from 'react'
 import { useCountdown } from '../hooks/useCountdown'
 
 const ATTEMPT_KEY = 'sc_attempts_used'
