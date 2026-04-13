@@ -95,6 +95,31 @@ export function parseSheetCSV(csvText) {
   return Object.values(map).sort(compareUsers)
 }
 
+export function getTiebreakerInfo(player, allPlayers) {
+  const idx = allPlayers.indexOf(player)
+  if (idx === 0 && allPlayers.length === 1) return null
+  const neighbor = allPlayers[idx - 1] ?? allPlayers[idx + 1]
+  if (!neighbor) return null
+
+  const sa = rankSort(player.attempts)
+  const sb = rankSort(neighbor.attempts)
+
+  for (let i = 0; i < 3; i++) {
+    const va = sa[i]?.streak ?? -1
+    const vb = sb[i]?.streak ?? -1
+    if (va !== vb) return { type: 'streak', rank: i }
+  }
+   
+  for (let i = 0; i < 3; i++) {
+    const streakVal = sa[i]?.streak
+    if (streakVal == null) break
+    const ta = fastestTimeForStreak(player.attempts, streakVal)
+    const tb = fastestTimeForStreak(neighbor.attempts, streakVal)
+    if (ta !== tb) return { type: 'time', rank: i }
+  }
+  return null
+}
+
 /** "M:SS" → milliseconds */
 function parseTimeToMs(str) {
   if (!str) return 0
