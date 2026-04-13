@@ -2,6 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { useCountdown } from '../hooks/useCountdown'
 
+const ATTEMPT_KEY = 'sc_attempts_used'
+
+function getAttemptsUsed() {
+  return parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
+}
+
 const START = import.meta.env.VITE_CHALLENGE_START || '2026-04-20T00:00:00+09:00'
 const END   = import.meta.env.VITE_CHALLENGE_END   || '2026-05-11T23:59:59+09:00'
 
@@ -12,6 +18,8 @@ export default function Home() {
   const endMs    = new Date(END).getTime()
 
   const isOpen   = now >= startMs && now < endMs
+  const attemptsUsed = getAttemptsUsed()
+  const attemptsLeft = Math.max(0, 3 - attemptsUsed)
   const hasEnded = now >= endMs
   const preOpen  = now < startMs
 
@@ -75,8 +83,9 @@ export default function Home() {
             <button
               className="btn btn-primary btn-full text-base py-4"
               onClick={() => navigate('/quiz')}
+              disabled={attemptsLeft === 0}
             >
-              Start Challenge →
+              {attemptsLeft === 0 ? 'No attempts remaining' : `Start Challenge → (${attemptsLeft} attempt${attemptsLeft !== 1 ? 's' : ''} left)`}
             </button>
             <p className="text-center text-xs text-zinc-400">
               15 questions · no skipping · 3 attempts total over the 3 weeks
