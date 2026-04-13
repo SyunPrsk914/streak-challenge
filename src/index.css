@@ -34,6 +34,11 @@
            hover:border-zinc-400 hover:bg-zinc-50
            active:scale-[0.98];
   }
+  .btn-danger {
+    @apply btn bg-rose-600 text-white border-rose-600
+           hover:bg-rose-700 hover:border-rose-700
+           active:scale-[0.98];
+  }
   .btn-full { @apply w-full; }
 
   /* ─── Choice buttons (quiz) ──────────────────────────────── */
