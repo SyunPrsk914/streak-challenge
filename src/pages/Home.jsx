@@ -96,10 +96,10 @@ export default function Home() {
             Apr 20 – May 11, 2026
           </p>
           <h1 className="text-3xl font-semibold tracking-tight leading-tight">
-            Streak Challenge
+            IYNA QotD Streak Challenge
           </h1>
           <p className="text-zinc-500 leading-relaxed text-sm max-w-sm">
-            Answer questions correctly in a row. One mistake ends your run.
+            Answer 15 questions correctly in a row. One mistake ends your run.
             How far can you go?
           </p>
         </div>
