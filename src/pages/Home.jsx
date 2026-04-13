@@ -1,49 +1,91 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
-import { useState } from 'react'
 import { useCountdown } from '../hooks/useCountdown'
+import { supabase } from '../supabase'
 
-const ATTEMPT_KEY = 'sc_attempts_used'
 const NICKNAME_KEY = 'sc_nickname'
-
-function getSavedNickname() {
-  return localStorage.getItem(NICKNAME_KEY) || ''
-}
-
-function getAttemptsUsed() {
-  return parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
-}
-
 const START = import.meta.env.VITE_CHALLENGE_START || '2026-04-20T00:00:00+09:00'
 const END   = import.meta.env.VITE_CHALLENGE_END   || '2026-05-11T23:59:59+09:00'
 
 export default function Home() {
   const navigate = useNavigate()
-  const [nickname, setNickname] = useState(() => getSavedNickname())
-  const [nickInput, setNickInput] = useState('')
   const now      = Date.now()
   const startMs  = new Date(START).getTime()
   const endMs    = new Date(END).getTime()
-
   const isOpen   = now >= startMs && now < endMs
-  const attemptsUsed = getAttemptsUsed()
-  const attemptsLeft = Math.max(0, 3 - attemptsUsed)
   const hasEnded = now >= endMs
   const preOpen  = now < startMs
 
   const toStart = useCountdown(START)
   const toEnd   = useCountdown(END)
   const cd      = isOpen ? toEnd : toStart
-  
-  const handleNicknameSubmit = () => {
-  const name = nickInput.trim()
-  if (!name) return
+
+  const [nickname,     setNickname]     = useState(() => localStorage.getItem(NICKNAME_KEY) || '')
+  const [nickInput,    setNickInput]    = useState('')
+  const [attemptsLeft, setAttemptsLeft] = useState(null)  // null = loading
+  const [nickError,    setNickError]    = useState('')
+  const [saving,       setSaving]       = useState(false)
+
+  // Load attempt count from DB whenever nickname is known
+  useEffect(() => {
+    if (!nickname) { setAttemptsLeft(null); return }
+    loadAttemptsLeft(nickname)
+  }, [nickname])
+
+  const loadAttemptsLeft = async (name) => {
+    const { data: participant } = await supabase
+      .from('participants')
+      .select('id')
+      .eq('nickname', name)
+      .single()
+
+    if (!participant) { setAttemptsLeft(3); return }
+
+    const { count } = await supabase
+      .from('attempts')
+      .select('id', { count: 'exact', head: true })
+      .eq('participant_id', participant.id)
+
+    setAttemptsLeft(Math.max(0, 3 - (count ?? 0)))
+  }
+
+  const handleNicknameSubmit = async () => {
+    const name = nickInput.trim()
+    if (!name) return
+    setSaving(true)
+    setNickError('')
+
+    // Check if nickname already taken
+    const { data: existing } = await supabase
+      .from('participants')
+      .select('id')
+      .eq('nickname', name)
+      .single()
+
+    if (existing) {
+      setNickError('This nickname is already taken — please choose another.')
+      setSaving(false)
+      return
+    }
+
+    // Register new participant
+    const { error } = await supabase
+      .from('participants')
+      .insert({ nickname: name })
+
+    if (error) {
+      setNickError('Something went wrong — please try again.')
+      setSaving(false)
+      return
+    }
+
     localStorage.setItem(NICKNAME_KEY, name)
     setNickname(name)
+    setSaving(false)
     navigate('/quiz')
   }
 
-  
   return (
     <Layout>
       <div className="animate-fade-in space-y-10">
@@ -94,46 +136,53 @@ export default function Home() {
           </div>
         )}
 
-        {/* ── Start button ── */}
+        {/* ── Start / nickname ── */}
         {isOpen && (
           <div className="space-y-2">
             {!nickname ? (
-  <div className="space-y-3">
-    <p className="text-sm font-medium text-zinc-700">Enter your nickname to begin</p>
-    <input
-      type="text"
-      value={nickInput}
-      onChange={e => setNickInput(e.target.value)}
-      onKeyDown={e => e.key === 'Enter' && handleNicknameSubmit()}
-      placeholder="Your nickname"
-      maxLength={30}
-      className="w-full border border-zinc-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-zinc-500 transition-all font-sans"
-    />
-    <button
-      className="btn btn-primary btn-full text-base py-4"
-      onClick={handleNicknameSubmit}
-      disabled={!nickInput.trim()}
-    >
-      Save &amp; Start Challenge →
-    </button>
-  </div>
-) : (
-  <div className="space-y-2">
-    <div className="flex items-center justify-between">
-      <p className="text-sm text-zinc-500">Playing as <span className="font-semibold text-zinc-900">{nickname}</span></p>
-    </div>
-    <button
-      className="btn btn-primary btn-full text-base py-4"
-      onClick={() => navigate('/quiz')}
-      disabled={attemptsLeft === 0}
-    >
-      {attemptsLeft === 0 ? 'No attempts remaining' : `Start Challenge → (${attemptsLeft} attempt${attemptsLeft !== 1 ? 's' : ''} left)`}
-    </button>
-  </div>
-)}
-<p className="text-center text-xs text-zinc-400">
-  15 questions · no skipping · 3 attempts total over the 3 weeks
-</p>
+              <div className="space-y-3">
+                <p className="text-sm font-medium text-zinc-700">Enter your nickname to begin</p>
+                <input
+                  type="text"
+                  value={nickInput}
+                  onChange={e => { setNickInput(e.target.value); setNickError('') }}
+                  onKeyDown={e => e.key === 'Enter' && handleNicknameSubmit()}
+                  placeholder="Your nickname"
+                  maxLength={30}
+                  disabled={saving}
+                  className="w-full border border-zinc-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-zinc-500 transition-all font-sans disabled:opacity-50"
+                />
+                {nickError && <p className="text-xs text-rose-500 font-medium">{nickError}</p>}
+                <button
+                  className="btn btn-primary btn-full text-base py-4"
+                  onClick={handleNicknameSubmit}
+                  disabled={!nickInput.trim() || saving}
+                >
+                  {saving ? 'Saving…' : 'Save & Start Challenge →'}
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <p className="text-sm text-zinc-500">
+                  Playing as <span className="font-semibold text-zinc-900">{nickname}</span>
+                  {attemptsLeft !== null && (
+                    <span className={`ml-2 text-xs font-medium ${attemptsLeft === 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
+                      · {attemptsLeft} attempt{attemptsLeft !== 1 ? 's' : ''} remaining
+                    </span>
+                  )}
+                </p>
+                <button
+                  className="btn btn-primary btn-full text-base py-4"
+                  onClick={() => navigate('/quiz')}
+                  disabled={attemptsLeft === 0 || attemptsLeft === null}
+                >
+                  {attemptsLeft === 0 ? 'No attempts remaining' : 'Start Challenge →'}
+                </button>
+              </div>
+            )}
+            <p className="text-center text-xs text-zinc-400">
+              15 questions · no skipping · 3 attempts total over the 3 weeks
+            </p>
           </div>
         )}
 
@@ -149,9 +198,7 @@ export default function Home() {
           <ol className="space-y-3">
             {RULES.map((rule, i) => (
               <li key={i} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
-                <span className="font-mono text-xs text-zinc-300 mt-0.5 shrink-0 w-5">
-                  {i + 1}.
-                </span>
+                <span className="font-mono text-xs text-zinc-300 mt-0.5 shrink-0 w-5">{i + 1}.</span>
                 {rule}
               </li>
             ))}
