@@ -1,11 +1,10 @@
-import Layout from '../components/Layout'
 import { useEffect, useState } from 'react'
-import { parseSheetCSV, formatTime, compareUsers } from '../utils/ranking'
+import Layout from '../components/Layout'
+import { parseSheetCSV, formatTime } from '../utils/ranking'
 
-const ADMIN_PW = import.meta.env.VITE_ADMIN_PASSWORD || ''
-const SHEET_URL = import.meta.env.VITE_SHEET_CSV_URL || ''
+const ADMIN_PW  = import.meta.env.VITE_ADMIN_PASSWORD || ''
+const SHEET_URL = import.meta.env.VITE_SHEET_CSV_URL  || ''
 
-/* ─── Sheet column format reference shown to admin ─────────── */
 const SAMPLE_ROWS = [
   { name: 'Alice',   attempt: 1, streak: 12, time: '2:34' },
   { name: 'Alice',   attempt: 2, streak:  7, time: '1:10' },
@@ -62,17 +61,18 @@ export default function Admin() {
           <p className="text-sm text-zinc-400">Leaderboard is driven by a Google Sheet. Edit the sheet — the site updates within 60 seconds.</p>
         </div>
 
-        {/* ── Step 1: Sheet setup ── */}
+        <ResultsManager />
+
         <Section title="Step 1 — Set up the Google Sheet">
           <ol className="space-y-3 text-sm text-zinc-600 leading-relaxed list-none">
             {[
               <>Create a new Google Sheet at <a href="https://sheets.new" target="_blank" rel="noreferrer" className="underline text-zinc-900">sheets.new</a>.</>,
               <>In row 1 add exactly these four column headers: <Code>Name</Code> &nbsp;<Code>Attempt</Code> &nbsp;<Code>Streak</Code> &nbsp;<Code>Time (M:SS)</Code></>,
-              <>From row 2 onwards, add one row per attempt (up to 3 per person). See the example below.</>,
+              <>From row 2 onwards, add one row per attempt (up to 3 per person).</>,
               <>When you receive a screenshot, add the result to the sheet. The site re-reads it every 60 seconds.</>,
               <>Share the sheet: File → Share → Share with anyone on the internet → Viewer access.</>,
               <>Get the CSV export URL: File → Share → Publish to web → Sheet 1 → CSV → Publish. Copy that URL.</>,
-              <>Paste it as <Code>VITE_SHEET_CSV_URL</Code> in your Vercel environment variables (or <Code>.env.local</Code>).</>,
+              <>Paste it as <Code>VITE_SHEET_CSV_URL</Code> in your Vercel environment variables.</>,
             ].map((step, i) => (
               <li key={i} className="flex gap-3">
                 <span className="font-mono text-xs text-zinc-300 w-5 shrink-0 mt-0.5">{i + 1}.</span>
@@ -82,20 +82,16 @@ export default function Admin() {
           </ol>
         </Section>
 
-        {/* ── Step 2: Column format ── */}
-        <Section title="Step 2 — Sheet column format">
+        <Section title="Sheet column format">
           <p className="text-sm text-zinc-500 mb-3">
-            One row = one attempt. Time is entered as <Code>M:SS</Code> (e.g. <Code>2:34</Code> for 2 minutes 54 seconds).
-            The site will automatically apply the tiebreak rules when sorting the leaderboard.
+            One row = one attempt. Time as <Code>M:SS</Code> (e.g. <Code>2:34</Code>).
           </p>
           <div className="overflow-x-auto rounded-xl border border-zinc-200">
             <table className="w-full text-sm text-left">
               <thead>
                 <tr className="border-b border-zinc-200 bg-zinc-50">
                   {['Name', 'Attempt', 'Streak', 'Time (M:SS)'].map(h => (
-                    <th key={h} className="px-4 py-2.5 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                      {h}
-                    </th>
+                    <th key={h} className="px-4 py-2.5 text-xs font-semibold text-zinc-500 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -113,15 +109,15 @@ export default function Admin() {
           </div>
         </Section>
 
-        {/* ── Step 3: Tiebreak reminder ── */}
         <Section title="Tiebreak rules (applied automatically)">
           <ol className="space-y-2 text-sm text-zinc-600 leading-relaxed">
             {[
               'Best streak — higher is better.',
-              'If equal, compare each player\'s 2nd-best streak.',
-              'If still equal, compare 3rd-best streak.',
-              'If all streaks are equal, compare the time taken on the best-streak attempt — faster wins.',
-              'If still equal, compare time on the 2nd-best-streak attempt.',
+              "If equal, compare each player's 2nd-best streak.",
+              "If still equal, compare 3rd-best streak.",
+              'If all streaks equal, compare fastest time among attempts that achieved the best streak.',
+              'If still equal, compare fastest time for the 2nd-best streak.',
+              'If still equal, compare fastest time for the 3rd-best streak.',
             ].map((rule, i) => (
               <li key={i} className="flex gap-3">
                 <span className="font-mono text-xs text-zinc-300 w-5 shrink-0 mt-0.5">{i + 1}.</span>
@@ -131,30 +127,22 @@ export default function Admin() {
           </ol>
         </Section>
 
-        {/* ── Current env check ── */}
         <Section title="Environment variable status">
-          <EnvCheck
-            name="VITE_SHEET_CSV_URL"
-            value={import.meta.env.VITE_SHEET_CSV_URL}
-          />
-          <EnvCheck
-            name="VITE_CHALLENGE_START"
-            value={import.meta.env.VITE_CHALLENGE_START}
-          />
-          <EnvCheck
-            name="VITE_CHALLENGE_END"
-            value={import.meta.env.VITE_CHALLENGE_END}
-          />
+          <EnvCheck name="VITE_SHEET_CSV_URL"   value={import.meta.env.VITE_SHEET_CSV_URL} />
+          <EnvCheck name="VITE_CHALLENGE_START" value={import.meta.env.VITE_CHALLENGE_START} />
+          <EnvCheck name="VITE_CHALLENGE_END"   value={import.meta.env.VITE_CHALLENGE_END} />
+          <EnvCheck name="VITE_ADMIN_PASSWORD"  value={import.meta.env.VITE_ADMIN_PASSWORD} />
         </Section>
-        <ResultsManager />
-        </div>
-      </Layout>
-    )
-  }
-  function ResultsManager() {
-  const [players, setPlayers] = useState([])
-  const [status, setStatus]   = useState('loading')
-  const [removing, setRemoving] = useState(null) // { name, attemptNumber }
+
+      </div>
+    </Layout>
+  )
+}
+
+function ResultsManager() {
+  const [players,  setPlayers]  = useState([])
+  const [status,   setStatus]   = useState('loading')
+  const [removing, setRemoving] = useState(null)
 
   const load = async () => {
     if (!SHEET_URL) { setStatus('unconfigured'); return }
@@ -163,89 +151,100 @@ export default function Admin() {
       const text = await res.text()
       setPlayers(parseSheetCSV(text))
       setStatus('ok')
-    } catch { setStatus('error') }
+    } catch {
+      setStatus('error')
+    }
   }
 
-  useEffect(() => { load() }, [])
-
-  if (status === 'loading') return <p className="text-sm text-zinc-400 animate-pulse">Loading results…</p>
-  if (status === 'unconfigured') return <p className="text-sm text-zinc-400">Sheet URL not configured.</p>
-  if (status === 'error') return <p className="text-sm text-rose-500">Could not load sheet.</p>
+  useEffect(() => { load() }, []) // eslint-disable-line
 
   return (
     <Section title="Results manager">
-      <div className="flex justify-end mb-2">
-        <button className="btn btn-outline text-xs py-1.5 px-3" onClick={load}>↻ Refresh</button>
-      </div>
-      <div className="space-y-4">
-        {players.map(player => {
-          const attemptsLeft = 3 - player.attempts.length
-          return (
-            <div key={player.name} className="card p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-sm text-zinc-900">{player.name}</p>
-                  <p className="text-xs text-zinc-400">
-                    {player.attempts.length} / 3 attempts used &nbsp;·&nbsp;
-                    <span className={attemptsLeft === 0 ? 'text-rose-500' : 'text-emerald-600'}>
-                      {attemptsLeft} remaining
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <table className="w-full text-xs">
-                <thead>
-                  <tr className="text-zinc-400 border-b border-zinc-100">
-                    <th className="text-left py-1.5 font-medium">Attempt</th>
-                    <th className="text-left py-1.5 font-medium">Streak</th>
-                    <th className="text-left py-1.5 font-medium">Time</th>
-                    <th className="text-right py-1.5 font-medium">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {player.attempts.map(a => (
-                    <tr key={a.attempt} className="border-b border-zinc-50 last:border-0">
-                      <td className="py-2 font-mono">#{a.attempt}</td>
-                      <td className="py-2 font-bold font-mono">{a.streak}</td>
-                      <td className="py-2 font-mono text-zinc-500">{formatTime(a.timeMs)}</td>
-                      <td className="py-2 text-right">
-                        <button
-                          className="text-rose-500 hover:text-rose-700 text-xs font-medium underline"
-                          onClick={() => setRemoving({ name: player.name, attemptNumber: a.attempt, totalAttempts: player.attempts.length })}
-                        >
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
-        })}
-      </div>
+      {status === 'loading'       && <p className="text-sm text-zinc-400 animate-pulse">Loading results…</p>}
+      {status === 'unconfigured'  && <p className="text-sm text-zinc-400">Sheet URL not configured.</p>}
+      {status === 'error'         && <p className="text-sm text-rose-500">Could not load sheet — check the URL and sharing settings.</p>}
 
-      {/* Remove confirmation modal */}
+      {status === 'ok' && (
+        <>
+          <div className="flex justify-end mb-3">
+            <button className="btn btn-outline text-xs py-1.5 px-3" onClick={load}>↻ Refresh</button>
+          </div>
+
+          {players.length === 0 && <p className="text-sm text-zinc-400">No results in the sheet yet.</p>}
+
+          <div className="space-y-4">
+            {players.map(player => {
+              const attemptsLeft = 3 - player.attempts.length
+              return (
+                <div key={player.name} className="card p-4 space-y-3">
+                  <div>
+                    <p className="font-semibold text-sm text-zinc-900">{player.name}</p>
+                    <p className="text-xs text-zinc-400">
+                      {player.attempts.length} / 3 attempts used &nbsp;·&nbsp;
+                      <span className={attemptsLeft === 0 ? 'text-rose-500 font-medium' : 'text-emerald-600 font-medium'}>
+                        {attemptsLeft} remaining
+                      </span>
+                    </p>
+                  </div>
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="text-zinc-400 border-b border-zinc-100">
+                        <th className="text-left py-1.5 font-medium">Attempt</th>
+                        <th className="text-left py-1.5 font-medium">Streak</th>
+                        <th className="text-left py-1.5 font-medium">Time</th>
+                        <th className="text-right py-1.5 font-medium">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {player.attempts.map(a => (
+                        <tr key={a.attempt} className="border-b border-zinc-50 last:border-0">
+                          <td className="py-2 font-mono">#{a.attempt}</td>
+                          <td className="py-2 font-bold font-mono">{a.streak}</td>
+                          <td className="py-2 font-mono text-zinc-500">{formatTime(a.timeMs)}</td>
+                          <td className="py-2 text-right">
+                            <button
+                              className="text-rose-500 hover:text-rose-700 text-xs font-medium underline"
+                              onClick={() => setRemoving({
+                                name:          player.name,
+                                attemptNumber: a.attempt,
+                                totalAttempts: player.attempts.length,
+                              })}
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )
+            })}
+          </div>
+        </>
+      )}
+
       {removing && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-xl">
-            <h3 className="font-semibold text-zinc-900">Remove attempt #{removing.attemptNumber} for {removing.name}?</h3>
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ background: 'rgba(0,0,0,0.4)' }}>
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4">
+            <h3 className="font-semibold text-zinc-900">
+              Remove attempt #{removing.attemptNumber} for {removing.name}?
+            </h3>
             <div className="bg-zinc-50 rounded-xl p-4 text-sm text-zinc-600 space-y-2 leading-relaxed">
               <p className="font-medium text-zinc-900">Do this in your Google Sheet:</p>
               <ol className="space-y-1.5 list-none">
-                <li className="flex gap-2"><span className="text-zinc-300 font-mono">1.</span> Delete the row for <strong>{removing.name}, Attempt {removing.attemptNumber}</strong>.</li>
-                {removing.attemptNumber < removing.totalAttempts && (
-                  <>
-                    {Array.from({ length: removing.totalAttempts - removing.attemptNumber }, (_, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-zinc-300 font-mono">{i + 2}.</span>
-                        Renumber <strong>{removing.name}</strong>'s Attempt {removing.attemptNumber + 1 + i} → Attempt {removing.attemptNumber + i}.
-                      </li>
-                    ))}
-                  </>
-                )}
                 <li className="flex gap-2">
-                  <span className="text-zinc-300 font-mono">{removing.totalAttempts - removing.attemptNumber + 2}.</span>
+                  <span className="text-zinc-300 font-mono shrink-0">1.</span>
+                  Delete the row for <strong>{removing.name}</strong>, Attempt {removing.attemptNumber}.
+                </li>
+                {Array.from({ length: removing.totalAttempts - removing.attemptNumber }, (_, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-zinc-300 font-mono shrink-0">{i + 2}.</span>
+                    Renumber <strong>{removing.name}</strong>'s Attempt {removing.attemptNumber + 1 + i} → Attempt {removing.attemptNumber + i}.
+                  </li>
+                ))}
+                <li className="flex gap-2">
+                  <span className="text-zinc-300 font-mono shrink-0">{removing.totalAttempts - removing.attemptNumber + 2}.</span>
                   <strong>{removing.name}</strong> will gain 1 attempt back automatically.
                 </li>
               </ol>
@@ -261,28 +260,17 @@ export default function Admin() {
   )
 }
 
-      </div>
-    </Layout>
-  )
-}
-
 function Section({ title, children }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-sm font-semibold text-zinc-900 tracking-tight border-b border-zinc-100 pb-2">
-        {title}
-      </h2>
+      <h2 className="text-sm font-semibold text-zinc-900 tracking-tight border-b border-zinc-100 pb-2">{title}</h2>
       {children}
     </div>
   )
 }
 
 function Code({ children }) {
-  return (
-    <code className="font-mono text-xs bg-zinc-100 text-zinc-800 px-1.5 py-0.5 rounded">
-      {children}
-    </code>
-  )
+  return <code className="font-mono text-xs bg-zinc-100 text-zinc-800 px-1.5 py-0.5 rounded">{children}</code>
 }
 
 function EnvCheck({ name, value }) {
@@ -290,8 +278,7 @@ function EnvCheck({ name, value }) {
   return (
     <div className="flex items-center justify-between py-2.5 border-b border-zinc-100 last:border-0">
       <code className="font-mono text-xs text-zinc-600">{name}</code>
-      <span className={`text-xs font-medium px-2 py-0.5 rounded-full
-        ${ok ? 'bg-emerald-50 text-emerald-700' : 'bg-zinc-100 text-zinc-400'}`}>
+      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${ok ? 'bg-emerald-50 text-emerald-700' : 'bg-zinc-100 text-zinc-400'}`}>
         {ok ? '✓ set' : 'not set'}
       </span>
     </div>
