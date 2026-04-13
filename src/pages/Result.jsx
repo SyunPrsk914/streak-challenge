@@ -101,8 +101,7 @@ export default function Result() {
               {saved
                 ? '✓ Result saved automatically.'
                 : '⏳ Saving result…'
-              }<br />
-              📸 &nbsp;Screenshot this screen and send it to the organiser.
+              }
             </p>
 
           </div>
