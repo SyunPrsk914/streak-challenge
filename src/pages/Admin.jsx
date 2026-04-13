@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import Layout from '../components/Layout'
+import { useEffect, useState } from 'react'
+import { parseSheetCSV, formatTime, compareUsers } from '../utils/ranking'
 
 const ADMIN_PW = import.meta.env.VITE_ADMIN_PASSWORD || ''
+const SHEET_URL = import.meta.env.VITE_SHEET_CSV_URL || ''
 
 /* ─── Sheet column format reference shown to admin ─────────── */
 const SAMPLE_ROWS = [
@@ -144,6 +147,116 @@ export default function Admin() {
             value={import.meta.env.VITE_CHALLENGE_END}
           />
         </Section>
+        <ResultsManager />
+        function ResultsManager() {
+  const [players, setPlayers] = useState([])
+  const [status, setStatus]   = useState('loading')
+  const [removing, setRemoving] = useState(null) // { name, attemptNumber }
+
+  const load = async () => {
+    if (!SHEET_URL) { setStatus('unconfigured'); return }
+    try {
+      const res  = await fetch(SHEET_URL)
+      const text = await res.text()
+      setPlayers(parseSheetCSV(text))
+      setStatus('ok')
+    } catch { setStatus('error') }
+  }
+
+  useEffect(() => { load() }, [])
+
+  if (status === 'loading') return <p className="text-sm text-zinc-400 animate-pulse">Loading results…</p>
+  if (status === 'unconfigured') return <p className="text-sm text-zinc-400">Sheet URL not configured.</p>
+  if (status === 'error') return <p className="text-sm text-rose-500">Could not load sheet.</p>
+
+  return (
+    <Section title="Results manager">
+      <div className="flex justify-end mb-2">
+        <button className="btn btn-outline text-xs py-1.5 px-3" onClick={load}>↻ Refresh</button>
+      </div>
+      <div className="space-y-4">
+        {players.map(player => {
+          const attemptsLeft = 3 - player.attempts.length
+          return (
+            <div key={player.name} className="card p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-sm text-zinc-900">{player.name}</p>
+                  <p className="text-xs text-zinc-400">
+                    {player.attempts.length} / 3 attempts used &nbsp;·&nbsp;
+                    <span className={attemptsLeft === 0 ? 'text-rose-500' : 'text-emerald-600'}>
+                      {attemptsLeft} remaining
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="text-zinc-400 border-b border-zinc-100">
+                    <th className="text-left py-1.5 font-medium">Attempt</th>
+                    <th className="text-left py-1.5 font-medium">Streak</th>
+                    <th className="text-left py-1.5 font-medium">Time</th>
+                    <th className="text-right py-1.5 font-medium">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {player.attempts.map(a => (
+                    <tr key={a.attempt} className="border-b border-zinc-50 last:border-0">
+                      <td className="py-2 font-mono">#{a.attempt}</td>
+                      <td className="py-2 font-bold font-mono">{a.streak}</td>
+                      <td className="py-2 font-mono text-zinc-500">{formatTime(a.timeMs)}</td>
+                      <td className="py-2 text-right">
+                        <button
+                          className="text-rose-500 hover:text-rose-700 text-xs font-medium underline"
+                          onClick={() => setRemoving({ name: player.name, attemptNumber: a.attempt, totalAttempts: player.attempts.length })}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Remove confirmation modal */}
+      {removing && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-xl">
+            <h3 className="font-semibold text-zinc-900">Remove attempt #{removing.attemptNumber} for {removing.name}?</h3>
+            <div className="bg-zinc-50 rounded-xl p-4 text-sm text-zinc-600 space-y-2 leading-relaxed">
+              <p className="font-medium text-zinc-900">Do this in your Google Sheet:</p>
+              <ol className="space-y-1.5 list-none">
+                <li className="flex gap-2"><span className="text-zinc-300 font-mono">1.</span> Delete the row for <strong>{removing.name}, Attempt {removing.attemptNumber}</strong>.</li>
+                {removing.attemptNumber < removing.totalAttempts && (
+                  <>
+                    {Array.from({ length: removing.totalAttempts - removing.attemptNumber }, (_, i) => (
+                      <li key={i} className="flex gap-2">
+                        <span className="text-zinc-300 font-mono">{i + 2}.</span>
+                        Renumber <strong>{removing.name}</strong>'s Attempt {removing.attemptNumber + 1 + i} → Attempt {removing.attemptNumber + i}.
+                      </li>
+                    ))}
+                  </>
+                )}
+                <li className="flex gap-2">
+                  <span className="text-zinc-300 font-mono">{removing.totalAttempts - removing.attemptNumber + 2}.</span>
+                  <strong>{removing.name}</strong> will gain 1 attempt back automatically.
+                </li>
+              </ol>
+            </div>
+            <div className="flex gap-2">
+              <button className="btn btn-outline flex-1" onClick={() => setRemoving(null)}>Cancel</button>
+              <button className="btn btn-primary flex-1" onClick={() => { setRemoving(null); load() }}>Done — Refresh</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </Section>
+  )
+}
 
       </div>
     </Layout>
