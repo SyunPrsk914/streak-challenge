@@ -107,7 +107,13 @@ export function getTiebreakerInfo(player, allPlayers) {
   for (let i = 0; i < 3; i++) {
     const va = sa[i]?.streak ?? -1
     const vb = sb[i]?.streak ?? -1
-    if (va !== vb) return { type: 'streak', rank: i }
+    if (va !== vb) {
+      const best = player.attempts
+        .map((a, idx) => ({ ...a, idx }))
+        .filter(a => a.streak === va)
+        .sort((a, b) => a.timeMs - b.timeMs)[0]
+      return { type: 'streak', rank: best?.idx ?? i }
+    }
   }
    
   for (let i = 0; i < 3; i++) {
@@ -115,7 +121,14 @@ export function getTiebreakerInfo(player, allPlayers) {
     if (streakVal == null) break
     const ta = fastestTimeForStreak(player.attempts, streakVal)
     const tb = fastestTimeForStreak(neighbor.attempts, streakVal)
-    if (ta !== tb) return { type: 'time', rank: i }
+    if (ta !== tb) {
+      // Find the chronological index of the attempt with this streak and fastest time
+      const best = player.attempts
+        .map((a, idx) => ({ ...a, idx }))
+        .filter(a => a.streak === streakVal)
+        .sort((a, b) => a.timeMs - b.timeMs)[0]
+      return { type: 'time', rank: best.idx }
+    }
   }
   return null
 }
