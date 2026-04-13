@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
-import { parseSheetCSV, formatTime, bestAttemptIndex } from '../utils/ranking'
+import { parseSheetCSV, formatTime, bestAttemptIndex, getTiebreakerInfo} from '../utils/ranking'
 
 const SHEET_URL = import.meta.env.VITE_SHEET_CSV_URL || ''
 
@@ -67,7 +67,7 @@ export default function Leaderboard() {
         {status === 'ok' && players.length > 0 && (
           <div className="space-y-2.5">
             {players.map((player, rank) => (
-              <PlayerRow key={player.name} player={player} rank={rank} />
+            <PlayerRow key={player.name} player={player} rank={rank} tiebreaker={getTiebreakerInfo(player, players)} />
             ))}
           </div>
         )}
@@ -77,7 +77,7 @@ export default function Leaderboard() {
   )
 }
 
-function PlayerRow({ player, rank }) {
+function PlayerRow({ player, rank , tiebreaker }) {
   const bestIdx = bestAttemptIndex(player.attempts)
   const isMedal = rank < 3
 
@@ -114,13 +114,15 @@ function PlayerRow({ player, rank }) {
             )
           }
           return (
-            <AttemptBox
-              key={i}
-              label={`#${a.attempt}`}
-              streak={a.streak}
-              time={formatTime(a.timeMs)}
-              best={isBest}
-            />
+          <AttemptBox
+            key={i}
+            label={`#${a.attempt}`}
+            streak={a.streak}
+            time={formatTime(a.timeMs)}
+            best={isBest}
+            highlightStreak={tiebreaker?.type === 'streak' && tiebreaker?.rank === i}
+            highlightTime={tiebreaker?.type === 'time' && tiebreaker?.rank === i}
+          />
           )
         })}
       </div>
@@ -129,7 +131,7 @@ function PlayerRow({ player, rank }) {
   )
 }
 
-function AttemptBox({ label, streak, time, best, empty }) {
+function AttemptBox({ label, streak, time, best, empty, highlightStreak, highlightTime  }) {
   if (empty) {
     return (
       <div className="flex flex-col items-center gap-0.5 w-[64px] border border-dashed border-zinc-200 rounded-lg px-2 py-2 opacity-40">
@@ -148,10 +150,14 @@ function AttemptBox({ label, streak, time, best, empty }) {
       <span className={`text-[10px] uppercase tracking-wider font-semibold ${best ? 'text-zinc-400' : 'text-zinc-400'}`}>
         {label}
       </span>
-      <span className={`text-xl font-bold font-mono leading-none ${best ? 'text-white' : 'text-zinc-900'}`}>
+      <span className={`text-xl font-bold font-mono leading-none
+        ${best ? 'text-white' : 'text-zinc-900'}
+        ${highlightStreak ? 'underline decoration-amber-400 decoration-2' : ''}`}>
         {streak}
       </span>
-      <span className={`text-[11px] font-mono tabular-nums ${best ? 'text-zinc-400' : 'text-zinc-500'}`}>
+      <span className={`text-[11px] font-mono tabular-nums
+        ${best ? 'text-zinc-400' : 'text-zinc-500'}
+        ${highlightTime ? 'underline decoration-amber-400 decoration-2' : ''}`}>
         {time}
       </span>
     </div>
