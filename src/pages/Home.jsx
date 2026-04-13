@@ -17,11 +17,10 @@ function getAttemptsUsed() {
 const START = import.meta.env.VITE_CHALLENGE_START || '2026-04-20T00:00:00+09:00'
 const END   = import.meta.env.VITE_CHALLENGE_END   || '2026-05-11T23:59:59+09:00'
 
-const [nickname, setNickname] = useState(() => getSavedNickname())
-const [nickInput, setNickInput] = useState('')
-
 export default function Home() {
   const navigate = useNavigate()
+  const [nickname, setNickname] = useState(() => getSavedNickname())
+  const [nickInput, setNickInput] = useState('')
   const now      = Date.now()
   const startMs  = new Date(START).getTime()
   const endMs    = new Date(END).getTime()
