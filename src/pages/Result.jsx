@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 
@@ -9,10 +10,10 @@ export default function Result() {
 
   const streak  = state?.streak  ?? 0
 
-  useState(() => {
-    const used = parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
-    localStorage.setItem(ATTEMPT_KEY, Math.min(used + 1, 3))
-  })
+  useEffect(() => {
+  const used = parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
+  localStorage.setItem(ATTEMPT_KEY, String(Math.min(used + 1, 3)))
+  }, [])
   
   const timeMs  = state?.timeMs  ?? 0
   const perfect = state?.perfect ?? false
