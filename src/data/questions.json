@@ -1,102 +1,848 @@
 [
-  {
+{
     "id": "q001", "category": "advanced",
-    "question": "Which AWS service lets you run containers without managing any servers?",
-    "choices": ["Amazon EC2", "AWS Fargate", "AWS Lambda", "Amazon ECS"],
-    "answer": 1
-  },
-  {
-    "id": "q002", "category": "advanced",
-    "question": "In Kubernetes, which object ensures a specified number of pod replicas are always running?",
-    "choices": ["DaemonSet", "StatefulSet", "ReplicaSet", "Job"],
-    "answer": 2
-  },
-  {
-    "id": "q003", "category": "advanced",
-    "question": "Which HTTP status code means the server understood the request but refuses to authorize it?",
-    "choices": ["401 Unauthorized", "403 Forbidden", "404 Not Found", "429 Too Many Requests"],
-    "answer": 1
-  },
-  {
-    "id": "q004", "category": "advanced",
-    "question": "What is the time complexity of searching a balanced binary search tree?",
-    "choices": ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
-    "answer": 2
-  },
-  {
-    "id": "q005", "category": "advanced",
-    "question": "Which design pattern defines a one-to-many dependency so all dependents are notified on state change?",
-    "choices": ["Strategy", "Decorator", "Observer", "Facade"],
-    "answer": 2
-  },
-  {
-    "id": "q006", "category": "pro",
-    "question": "What does the CAP theorem state cannot be simultaneously guaranteed in a distributed system?",
-    "choices": [
-      "Consistency, Availability, and Partition tolerance",
-      "Concurrency, Atomicity, and Performance",
-      "Caching, Authentication, and Persistence",
-      "Consistency, Atomicity, and Persistence"
-    ],
+    "question": "What is the name of the bundle of nerves that connect the left and right hemispheres of the brain?\n左脳と右脳を繋げる神経繊維の太い束の名前はどれでしょう？",
+    "choices": ["Corpus Callosum（脳梁）", "Optic Tract（視神経線維束）", "Spinal Chord（脊髄）", "Cauda Equina（馬尾）"],
     "answer": 0
   },
-  {
-    "id": "q007", "category": "pro",
-    "question": "In a B-tree of order m, what is the maximum number of keys a single node can hold?",
-    "choices": ["m", "m − 1", "2m", "2m − 1"],
+{
+    "id": "q002", "category": "intermediate",
+    "question": "Which cortical area processes visual information of colors and shapes and integrates them into complex visual understanding?\n色や形の視覚情報を処理し、複雑な視覚認識へと統合する大脳皮質の領域はどこですか？",
+    "choices": ["Frontal Lobe(前頭葉)", "Parietal Lobe (頭頂葉)", "Occipital Lobe(後頭葉)", "Temporal Lobe(側頭葉)"],
+    "answer": 2
+  },
+{
+    "id": "q003", "category": "basic",
+    "question": "What are the cell that support the function of nerve cells?\n神経細胞の機能を支える細胞は何ですか？",
+    "choices": ["Mitochondria（ミトコンドリア）", "Red blood cells(赤血球)", "Glia Cells(グリア細胞)", "Hepatocyte(肝細胞)"],
+    "answer": 2
+  },
+{
+    "id": "q004", "category": "basic",
+    "question": "What allows the neurons to tranfer information in the nervous system?\n神経系において、ニューロンは何を使って情報を伝達するでしょう？",
+    "choices": ["Genes (遺伝子)", "Electric Signals (電気信号)", "Proteins (たんぱく質)", "Chemical Energy (化学エネルギー)"],
+    "answer": 1
+  },
+{
+    "id": "q005", "category": "intermediate",
+    "question": "What neurotransmitter is depleted in Parkinson's Disease?\nパーキンソン病ではどの神経伝達物質が低下しますか？",
+    "choices": ["Serotonin (セロトニン)", "Dopamine (ドーパミン)", "Acetylcholine (アセチルコリン)", "GABA (GABA)"],
+    "answer": 1
+  },
+{
+    "id": "q006", "category": "advanced",
+    "question": "During an action potential, which ion's rapid influx into the neuron is primarily responsible for depolarization of the membrane?\n活動電位の発生中、どのイオンの急速な流入が膜の脱分極を引き起こしますか？",
+    "choices": ["Sodium - Na⁺ (ナトリウム)", "Potassium - K⁺ (カリウム)", "Calcium - Ca²⁺ (カルシウム)", "Chloride - Cl⁻ (塩化物)"],
+    "answer": 0
+  },
+{
+    "id": "q007", "category": "basic",
+    "question": "Which of the following is the correct pair that forms the CNS (Central Nervous System)?\nCNS (中枢神経系)を構成する正しいペアは次のうちどれでしょう？",
+    "choices": ["Motor nerve & Autonomic nerve (運動神経と自律神経)", "Brain & Motor nerve (脳と運動神経)", "Spinal cord & Autonomic nerve (脊髄と自律神経)", "Brain & Spinal cord (脳と脊髄)"],
     "answer": 3
   },
-  {
-    "id": "q008", "category": "trivia",
-    "question": "What year was the first public release of Python?",
-    "choices": ["1989", "1991", "1994", "1995"],
+{
+    "id": "q008", "category": "intermediate",
+    "question": "Which brain structure regulates the release of hormones from the pituitary gland through neuroendocrine control?\n神経内分泌によって下垂体からのホルモン分泌を調節している脳の構造はどれですか？",
+    "choices": ["Thalamus（視床）", "Hypothalamus（視床下部）", "Hippocampus（海馬）", "Amygdala（扁桃体）"],
     "answer": 1
   },
-  {
-    "id": "q009", "category": "trivia",
-    "question": "Which company originally developed the Go programming language?",
-    "choices": ["Microsoft", "Apple", "Google", "Meta"],
-    "answer": 2
+{
+    "id": "q009", "category": "basic",
+    "question": "Which part of the neuron sends electrical signals to other neurons or target cells?\n他の神経細胞やターゲット細胞に電気信号を送るのは、神経細胞のどの部分ですか？",
+    "choices": ["Dendrite（樹状突起）", "Axon (軸索)", "Nucleus (細胞核)", "Synaptic vesicle (シナプス小胞)"],
+    "answer": 1
   },
-  {
-    "id": "q010", "category": "trivia",
-    "question": "What does 'Linux' combine with 'Linus'?",
-    "choices": ["MINIX", "Unix", "Xenix", "Lynx"],
+{
+    "id": "q010", "category": "basic",
+    "question": "Which part of the brain is activated by addictive substances such as nicotine and alcohol?\nニコチンやアルコールのような依存物質は脳の何を活性化させる？",
+    "choices": ["Reward System (報酬系)", "Pain System（痛覚系）", "Visual System（視覚系）", "Auditory System （聴覚系）"],
     "answer": 0
   },
-  {
+{
     "id": "q011", "category": "basic",
-    "question": "What does DNS stand for?",
-    "choices": ["Data Network Service", "Domain Name System", "Dynamic Naming Structure", "Distributed Node System"],
+    "question": "Which of the following is not a glia cell?\n以下のうちグリア細胞でないものはどれ？",
+    "choices": ["Microglia（ミクログリア）", "Astrocyte（アストロサイト）", "Oligodendrocytes (オリゴデンドロサイト)", "Synaptic vesicle (シナプス小胞)"],
+    "answer": 3
+  },
+{
+    "id": "q012", "category": "intermediate",
+    "question": "You suddenly do not recognize any of your friend's words. Which of the following area is probably damaged?\nあなたは突然友達の言っていることが何も理解できなくなりました。どの部位が損傷を受けている可能性が高いですか？",
+    "choices": ["Broca's Area (ブローカ野)", "Wernicke's Area (ウェルニッケ野)", "Motor Cortex (運動皮質)", "Somatosensory Cortex (体性感覚野)"],
     "answer": 1
   },
-  {
-    "id": "q012", "category": "basic",
-    "question": "Which of the following is NOT a primitive JavaScript type?",
-    "choices": ["undefined", "boolean", "float", "symbol"],
-    "answer": 2
+{
+    "id": "q013", "category": "advanced",
+    "question": "Which ion is primarily responsible for generating the after-hyperpolarization phase in neurons?\nニューロンの過分極後期を主に生じさせるイオンはどれですか？",
+    "choices": ["Sodium - Na⁺ (ナトリウム)", "Chloride - Cl⁻ (塩化物)", "Calcium - Ca²⁺ (カルシウム)", "Potassium - K⁺ (カリウム)"],
+    "answer": 3
   },
-  {
-    "id": "q013", "category": "basic",
-    "question": "What is the default port for HTTPS?",
-    "choices": ["80", "8080", "443", "22"],
-    "answer": 2
-  },
-  {
+{
     "id": "q014", "category": "basic",
-    "question": "In version control, what does 'git stash' do?",
-    "choices": [
-      "Permanently deletes uncommitted changes",
-      "Temporarily saves uncommitted changes",
-      "Merges the current branch with main",
-      "Creates a new branch from HEAD"
-    ],
+    "question": "Which organelle controls the function of the neuron cell?\nニューロンの働きをコントロールする細胞小器官はどれですか？",
+    "choices": ["Dendrite（樹状突起）", "Axon (軸索)", "Nucleus (細胞核)", "Axon Terminal (軸索終末)"],
+    "answer": 2
+  },
+{
+    "id": "q015", "category": "basic",
+    "question": "Which cells protect neurons by removing waste and pathogens?\n老廃物や病原体を除去してニューロンを守る細胞はどれですか？",
+    "choices": ["Astrocyte（アストロサイト）", "Ependymal Cells (上衣細胞)", "Microglia（ミクログリア）", "Oligodendrocytes (オリゴデンドロサイト)"],
+    "answer": 2
+  },
+{
+    "id": "q016", "category": "intermediate",
+    "question": "If there is a magical drink to boost certain neurotransmitter, which of the following should you drink to instantly calm down yourself from excitement?\n特定の神経伝達物質を多くできる魔法のドリンクがある時、自分をすぐに興奮から落ち着かせたい場合は次のうちどれを飲むべきでしょう？",
+    "choices": ["\"Acetylcho-rink\" (アセチルコリンドリンク)", "\"ChuGABA\" (GABAドリンク)", "\"Drinkopamine\" (ドーパミンドリンク)", "\"Sip-erotonin\" (セロトニンドリンク)"],
     "answer": 1
   },
-  {
-    "id": "q015", "category": "basic",
-    "question": "Which protocol is commonly used to retrieve emails from a mail server?",
-    "choices": ["SMTP", "FTP", "IMAP", "HTTP"],
+{
+    "id": "q017", "category": "advanced",
+    "question": "Which cortical area integrates information from multiple senses to create spatial awareness?\n複数の感覚情報を統合し空間認識を形成する皮質領域はどれですか？",
+    "choices": ["Posterior Parietal Cortex (後部頭頂皮質)", "Prefrontal Cortex (前頭前皮質)", "Occipital Cortex (後頭葉皮質)", "Insula (島皮質)"],
+    "answer": 0
+  },
+{
+    "id": "q018", "category": "basic",
+    "question": "Your heart beats, and you breathe even if you are not trying to. Which part of the brain is allowing you to do that to stay alive?\n私たちは努力せずとも、生命維持のために心臓は動くし呼吸もします。これは脳のどの部分のおかげですか？",
+    "choices": ["Cerebellum (小脳)", "Medulla (延髄)", "Hippocampus (海馬)", "Occipital Lobe (後頭葉)"],
+    "answer": 1
+  },
+{
+    "id": "q019", "category": "intermediate",
+    "question": "Which pathway is primarily associated with reward and motivation?\n報酬と動機づけに主に関係する経路はどれですか？",
+    "choices": ["Corticospinal Pathway (皮質脊髄路)", "Reticulospinal Tract (網様体脊髄路)", "Mesolimbic Dopamine Pathway (中脳辺縁系ドーパミン経路)", "Spinothalamic Pathway (脊髄視床路)"],
     "answer": 2
+  },
+{
+    "id": "q020", "category": "advanced",
+    "question": "Which receptor type does glutamate primarily activate to induce fast excitatory postsynaptic potentials?\n速い興奮性シナプス後電位を生じるためにグルタミン酸が主に活性化する受容体はどれですか？",
+    "choices": ["GABA A Receptors (GABA A受容体)", "NMDA Receptors (NMD受容体)", "Glycine Receptors (グリシン受容体)", "AMPA Receptors (AMPA受容体)"],
+    "answer": 3
+  },
+{
+    "id": "q021", "category": "basic",
+    "question": "Which region processes visual information?\n視覚情報を処理する領域はどれですか？",
+    "choices": ["Temporal Lobe (側頭葉)", "Frontal Lobe (前頭葉)", "Parietal Lobe (頭頂葉)", "Occipital Lobe (後頭葉)"],
+    "answer": 3
+  },
+{
+    "id": "q022", "category": "intermediate",
+    "question": "You want to drink when there is not enough water. You want to eat when there is no food. Which of the following is causing you to think that way?\n水分が足らない時は飲みたくなるし、食べ物がないときは食べたくなる。こう思わせているのは次のうちどれですか？",
+    "choices": ["Hippocampus（海馬）", "Hypothalamus（視床下部）", "Cerebellum（小脳）", "Medulla（延髄）"],
+    "answer": 1
+  },
+{
+    "id": "q023", "category": "advanced",
+    "question": "Which ion channel is essential for neurotransmitter release at synaptic terminals?\nシナプス終末で神経伝達物質の放出に必須のイオンチャネルはどれですか？",
+    "choices": ["Voltage-gated Ca²⁺ Channels (電位依存性カルシウムチャネル)", "Voltage-gated Na⁺ Channels (電位依存性ナトリウムチャネル)", "Leak K⁺ Channels (リークカリウムチャネル)", "HCN Channels (過分極活性化環状ヌクレオチド依存性チャネル)"],
+    "answer": 0
+  },
+{
+    "id": "q024", "category": "basic",
+    "question": "Which cells form myelin in the PNS?\n末梢神経系でミエリンを形成する細胞はどれですか？",
+    "choices": ["Oligodendrocytes (オリゴデンドロサイト)", "Schwann Cells (シュワン細胞)", "Astrocyte（アストロサイト）", "Microglia（ミクログリア）"],
+    "answer": 1
+  },
+{
+    "id": "q025", "category": "advanced",
+    "question": "Which nucleus is part of the basal ganglia and involved in regulating voluntary movement initiation?\n大脳基底核の一部で、随意運動の開始を調整する核はどれですか？",
+    "choices": ["Substantia Nigra (黒質)", "Putamen (被殻)", "Amygdala (扁桃体)", "Habenula (手綱核)"],
+    "answer": 1
+  },
+{
+    "id": "q026", "category": "intermediate",
+    "question": "Which lobe is crucial for decision-making and impulse control?\n意思決定と衝動制御に重要な脳葉はどれですか？",
+    "choices": ["Occipital Lobe (後頭葉)", "Temporal Lobe (側頭葉)", "Frontal Lobe (前頭葉)", "Parietal Lobe (頭頂葉)"],
+    "answer": 2
+  },
+{
+    "id": "q027", "category": "intermediate",
+    "question": "Which brain area plays a key role in forming long-term declarative memories?\n長期陳述記憶の形成に重要な脳領域はどれですか？",
+    "choices": ["Amygdala (扁桃体)", "Hypothalamus (視床下部)", "Hippocampus (海馬)", "Cerebellum (小脳)"],
+    "answer": 2
+  },
+{
+    "id": "q028", "category": "advanced",
+    "question": "Which glial cell regulates extracellular potassium concentration during intense neuronal firing?\n激しいニューロン活動中に細胞外カリウム濃度を調節するグリア細胞はどれですか？",
+    "choices": ["Schwann Cell (シュワン細胞)", "Microglia（ミクログリア）", "Ependymal Cell (上衣細胞)", "Astrocyte（アストロサイト）"],
+    "answer": 3
+  },
+{
+    "id": "q029", "category": "basic",
+    "question": "Which neurotransmitter is associated with pleasure and reward?\n快楽と報酬に関連する神経伝達物質はどれですか？",
+    "choices": ["Dopamine (ドーパミン)", "Serotonin (セロトニン)", "GABA (GABA)", "Glutamate (グルタミン酸)"],
+    "answer": 0
+  },
+{
+    "id": "q030", "category": "intermediate",
+    "question": "Which brain region is essential for coordinating voluntary movement?\n随意運動の調整に重要な脳領域はどれですか？",
+    "choices": ["Cerebellum (小脳)", "Hippocampus (海馬)", "Amygdala (扁桃体)", "Thalamus (視床)"],
+    "answer": 0
+  },
+{
+    "id": "q031", "category": "intermediate",
+    "question": "You are listening to a friend's story and instantly recognize their voice. Which brain region helps identify familiar sounds?\nあなたは友達の話を聞いて、すぐに相手の声を認識しました。これは脳のどの部位のおかげですか？",
+    "choices": ["Hippocampus（海馬）", "Temporal Lobe（側頭葉）", "Occipital Lobe（後頭葉）", "Thalamus（視床）"],
+    "answer": 1
+  },
+{
+    "id": "q032", "category": "basic",
+    "question": "Which cells produce cerebrospinal fluid (CSF)?\n脳脊髄液（CSF）を産生する細胞はどれですか？",
+    "choices": ["Astrocytes（アストロサイト）", "Microglia（ミクログリア）", "Schwann Cells（シュワン細胞）", "Ependymal Cells（上衣細胞）"],
+    "answer": 3
+  },
+{
+    "id": "q033", "category": "advanced",
+    "question": "Which protein accumulates abnormally in Alzheimer's disease, forming extracellular plaques?\nアルツハイマー病で細胞外に蓄積する異常タンパク質はどれですか？",
+    "choices": ["Tau Protein（τタンパク質）", "α-synuclein（αシヌクレイン）", "Amyloid-β（アミロイドβ）", "Huntingtin（ハンチンチン）"],
+    "answer": 2
+  },
+{
+    "id": "q034", "category": "intermediate",
+    "question": "Damage to which structure most likely causes difficulty coordinating hand movements?\n手の動きをうまく調整できないのは、どの構造の損傷が原因ですか？",
+    "choices": ["Cerebellum（小脳）", "Amygdala（扁桃体）", "Hippocampus（海馬）", "Frontal Lobe（前頭葉）"],
+    "answer": 0
+  },
+{
+    "id": "q035", "category": "basic",
+    "question": "Which neurotransmitter is essential for muscle contraction at the neuromuscular junction?\n神経筋接合部で筋収縮に必要な神経伝達物質はどれですか？",
+    "choices": ["GABA（GABA）", "Acetylcholine（アセチルコリン）", "Serotonin（セロトニン）", "Glutamate（グルタミン酸）"],
+    "answer": 1
+  },
+{
+    "id": "q036", "category": "advanced",
+    "question": "Which brain imaging technique measures changes in blood oxygenation related to neural activity?\n神経活動に伴う血流変化を測定する脳画像技術はどれですか？",
+    "choices": ["CT Scan（CTスキャン）", "PET Scan（PETスキャン）", "EEG（脳波）", "fMRI（機能的MRI）"],
+    "answer": 3
+  },
+{
+    "id": "q037", "category": "intermediate",
+    "question": "Which brain structure filters and relays sensory information to the cortex?\n感覚情報を大脳皮質に中継する構造はどれですか？",
+    "choices": ["Hypothalamus (視床下部)", "Brainstem (脳幹)", "Thalamus (視床)", "Amygdala (扁桃体)"],
+    "answer": 2
+  },
+{
+    "id": "q038", "category": "basic",
+    "question": "Which part of a neuron receives incoming signals?\n受信した信号を受け取るニューロンの部位はどれですか？",
+    "choices": ["Axon（軸索）", "Dendrites（樹状突起）", "Synapse（シナプス）", "Myelin Sheath（ミエリン鞘）"],
+    "answer": 1
+  },
+{
+    "id": "q039", "category": "intermediate",
+    "question": "You smell freshly baked bread and immediately recall childhood memories. Which structure links smell and memory?\nあなたは焼きたてのパンの匂いから子どもの頃を思い出しました。これはどの構造のおかげですか？",
+    "choices": ["Cerebellum（小脳）", "Basal Ganglia（大脳基底核）", "Hippocampus（海馬）", "Pons（橋）"],
+    "answer": 2
+  },
+{
+    "id": "q040", "category": "advanced",
+    "question": "Loss of dopamine neurons in which brain area causes Parkinson's disease?\nパーキンソン病はどの脳領域のドーパミン神経の喪失によって起こりますか？",
+    "choices": ["Substantia Nigra（黒質）", "Red Nucleus（赤核）", "Putamen（被殻）", "Globus Pallidus（淡蒼球）"],
+    "answer": 0
+  },
+{
+    "id": "q041", "category": "basic",
+    "question": "Which brainwave pattern was NOT seen while you had your first dream of the New Year?\n今年の初夢を見ていた時、次の脳波パターンの中でみられなかったものはどれですか？",
+    "choices": ["Beta Waves（β波）", "Theta Waves（θ波）", "Gamma Waves（γ波）", "Delta Waves（δ波）"],
+    "answer": 3
+  },
+{
+    "id": "q042", "category": "intermediate",
+    "question": "Electromyography system indicated a spontaneous electrical activity in a muscle at rest. Which of the following disease does this patient probably have?\n筋電図検査で筋肉が動いていないときに電気信号が確認されました。この患者は次のうちどの病気をおそらく患っているでしょう？",
+    "choices": ["ALS（筋萎縮性側索硬化症）", "Epilepsy（てんかん）", "Parkinson's Disease（パーキンソン病）", "Stroke（脳卒中）"],
+    "answer": 0
+  },
+{
+    "id": "q043", "category": "advanced",
+    "question": "Which channel opens first during an action potential?\n活動電位の発生時に最初に開くチャネルはどれですか？",
+    "choices": ["Voltage-gated K⁺ channels（電位依存性カリウムチャネル）", "Voltage-gated Na⁺ Channels (電位依存性ナトリウムチャネル)", "Leak K⁺ Channels (リークカリウムチャネル)", "Ca²⁺-activated K⁺ channels（カルシウム活性化カリウムチャネル）"],
+    "answer": 1
+  },
+{
+    "id": "q044", "category": "basic",
+    "question": "Which of the following is not part of the central nervous system?\n次のうち、中枢神経系に含まれないものはどれですか？",
+    "choices": ["Brain（脳）", "Spinal Cord（脊髄）", "Optic Nerve（視神経）", "None of the above（いずれでもない）"],
+    "answer": 3
+  },
+{
+    "id": "q045", "category": "intermediate",
+    "question": "You turned around because you felt your friend touch your shoulder...yet no one did. This situation is an example of which cortex acting for some reason?\nあなたは友達が肩に触れたと感じて振り返った...しかし誰も触れていませんでした。これはどの皮質が何らかの理由で作用した例ですか？",
+    "choices": ["Primary Motor Cortex（一次運動野）", "Primary Somatosensory Cortex（一次体性感覚野）", "Prefrontal Cortex（前頭前皮質）", "Visual Cortex（視覚野）"],
+    "answer": 1
+  },
+{
+    "id": "q046", "category": "advanced",
+    "question": "Which glial cell type forms the blood–brain barrier?\n血液脳関門（BBB）の形成に関与するグリア細胞はどれですか？",
+    "choices": ["Oligodendrocytes（オリゴデンドロサイト）", "Ependymal Cells（上衣細胞）", "Microglia（ミクログリア）", "Astrocytes（アストロサイト）"],
+    "answer": 3
+  },
+{
+    "id": "q047", "category": "basic",
+    "question": "When you are juggling 12 balls while standing on a balance beam, which of the following area is probably the most active?\n平均台の上に立ちながら12個のボールでジャグリングをしている時におそらく最も活発な領域は次のうちどれでしょう？",
+    "choices": ["Cerebellum（小脳）", "Frontal Lobe（前頭葉）", "Hippocampus（海馬）", "Amygdala（扁桃体）"],
+    "answer": 0
+  },
+{
+    "id": "q048", "category": "intermediate",
+    "question": "You accidentally touch a hot pan and quickly pull your hand away. Which pathway controlled this quick response?\n手が熱いフライパンに当たってしまい、あなたはすぐに手を引きました。この早い反応はどの経路によって制御されていますか？",
+    "choices": ["Corticospinal Tract（錐体路）", "Spinocerebellar Tract（脊髄小脳路）", "Reflex Arc（反射弓）", "Reticular Formation（網様体）"],
+    "answer": 2
+  },
+{
+    "id": "q049", "category": "trivia",
+    "question": "An iconic American boxing champion Muhammad Ali was diagnosed with which of the following neurodegenerative disorder?\nアメリカの象徴的なボクサーのモハメド・アリが罹患していた神経変性疾患は次のうちどれでしょう？",
+    "choices": ["ALS (筋萎縮性側索硬化症)", "Parkinson's Disease (パーキンソン病)", "Multiple Sclerosis (多発性硬化症)", "Alzheimer's Disease (アルツハイマー病)"],
+    "answer": 1
+  },
+{
+    "id": "q050", "category": "intermediate",
+    "question": "Which neurotransmitter deficiency is strongly associated with depression?\nうつ病と強く関連する神経伝達物質の不足はどれですか？",
+    "choices": ["Serotonin（セロトニン）", "Histamine（ヒスタミン）", "Nitric Oxide（一酸化窒素）", "Oxytocin（オキシトシン）"],
+    "answer": 0
+  },
+{
+    "id": "q051", "category": "intermediate",
+    "question": "What are the gaps in an axon's myelin sheath that enable neurotransmitters to transmit at a much faster speed?\n神経伝達物質をより速く伝達することを可能にしている軸索のミエリン鞘の隙間は何ですか？",
+    "choices": ["Node of Ranvier(ランビエ絞輪）", "Dendrite(樹状突起）", "Nucleus(核）", "Synapse(シナプス）"],
+    "answer": 0
+  },
+{
+    "id": "q052", "category": "advanced",
+    "question": "What is the disease that causes basal ganglia to shrink?\n大脳基底核が委縮してしまう病気は？",
+    "choices": ["Epilepsy(てんかん)", "Stroke(脳卒中)", "Huntington's disease(ハンチントン病)", "Schizophrenia(総合失調症）"],
+    "answer": 2
+  },
+{
+    "id": "q053", "category": "basic",
+    "question": "How long is a typical \"sleep cycle\"?\n一般的な「睡眠サイクル」は約何分ですか？",
+    "choices": ["60 minutes (60分)", "90 minutes (90分)", "3 hours (3時間)", "8 hours (8時間)"],
+    "answer": 1
+  },
+{
+    "id": "q054", "category": "advanced",
+    "question": "Which of the following is a language disorder?\n次のうち、言語障害を意味する単語はどれでしょう？",
+    "choices": ["Atrophy", "Akinesia", "Amnesia", "Aphasia"],
+    "answer": 3
+  },
+{
+    "id": "q055", "category": "basic",
+    "question": "You are walking through a haunted house and a jump-scare makes your heart race and your palms sweat. Which part of your nervous system just took control?\nお化け屋敷を歩いていると、急に驚かされて心拍数が上がり、手汗をかきました。この時、神経系のどの部分が働いていますか？",
+    "choices": ["Somatic Nervous System (体性神経系)", "Parasympathetic Nervous System (副交感神経系)", "Sympathetic Nervous System (交感神経系)", "Enteric Nervous System (腸管神経系)"],
+    "answer": 2
+  },
+{
+    "id": "q056", "category": "basic",
+    "question": "In the mid 1800's, a metal rod struck through the skull of Phineas Gage. He survived the injury, but his personality changed drastically, to the point that his friends described him as being \"no longer Gage.\" Which lobe did Gage injure?\n1800年代半ば、鉄の棒がフィニアスゲージの頭を貫通しました。彼は無事生還しましたが、性格が大きく変わってしまい、彼の友人らは彼のことを「もはやゲージではない」とまで言うようになりました。フィニアスゲージは脳のどの部位に損傷を受けましたか？",
+    "choices": ["Frontal Lobe（前頭葉）", "Parietal Lobe（頭頂葉）", "Temporal Lobe（側頭葉）", "Occipital Lobe（後頭葉）"],
+    "answer": 0
+  },
+{
+    "id": "q057", "category": "intermediate",
+    "question": "The protective membranes around the brain and spinal chord are called \"meninges.\" What do you call the state where the meninges is inflammed? (The wrong answers are all made-up words)\n脳と骨髄を覆う「髄膜」は英語で「Meninges」ですが、「髄膜炎」は英語でなんと言うでしょう？（不正解の選択肢は全て存在しない用語です）",
+    "choices": ["Meningitism", "Meningitosis", "Meningitis", "Meningitoma"],
+    "answer": 2
+  },
+{
+    "id": "q058", "category": "intermediate",
+    "question": "What is the most common cause of hearing loss?\n難聴の最も一般的な原因は？",
+    "choices": ["Damage to auditory nerve（聴覚神経の損傷）", "Damage to eardrum（鼓膜の損傷）", "Loss of hair inside the ear（繊毛の減少）", "Damage to auditory cortex（聴覚野の損傷）"],
+    "answer": 2
+  },
+{
+    "id": "q059", "category": "trivia",
+    "question": "This famous artist is often associated with \"Ear-cutting\" and is theorized by some neuroscientists to have suffered from temporal lobe epilepsy or bipolar disorder. Who is he?\n「耳切り事件」で知られるとある芸術家は、一部の神経科学者から側頭葉てんかんや双極性障害を患っていたのではないかと推測されています。それは誰でしょう？",
+    "choices": ["Leonardo da Vinci (レオナルド・ダ・ヴィンチ)", "Pablo Picasso (パブロ・ピカソ)", "Vincent van Gogh (フィンセント・ファン・ゴッホ)", "Salvador Dalí (サルバドール・ダリ)"],
+    "answer": 2
+  },
+{
+    "id": "q060", "category": "intermediate",
+    "question": "Which protein is not related to the development of Alzheimer's?\nアルツハイマー病の発症に関係が比較的少ないタンパク質は次のうちどれでしょう？",
+    "choices": ["Tau protein（タウタンパク質）", "Aquapolin4（アクアポリン4）", "Rhodopsin（ロドプシン）", "Amyloid beta（アミロイドベータ）"],
+    "answer": 2
+  },
+{
+    "id": "q061", "category": "intermediate",
+    "question": "Which of the following is NOT a reason for why mouse are used for experiments regarding the brain and neruoscience?\n次のうち、脳や神経科学の研究において、マウスが頻繁に用いられる理由に当てはまらないものはどれでしょう？",
+    "choices": ["Because the structure of the brain is similar to humans （脳の構造がヒトに似ているから）", "Because they are easy to perform genetic mutations（遺伝子の組み換えが容易だから）", "Because their mental states can be easily and directly observed（精神状態を容易かつ直接観察できるから）", "Because the have a relatively short life span（寿命が比較的短いから）"],
+    "answer": 2
+  },
+{
+    "id": "q062", "category": "intermediate",
+    "question": "Which of the following is used to treat neuroinflammation?\n次のうち、神経炎症の治療に用いられるものはどれですか。",
+    "choices": ["Dopamine agonists (ドーパミン作動薬)", "Corticosteroids (副腎皮質ステロイド)", "Acetylcholinesterase inhibitors (アセチルコリンエステラーゼ阻害薬)", "Selective serotonin reuptake inhibitors (選択的セロトニン再取り込み阻害薬)"],
+    "answer": 1
+  },
+{
+    "id": "q063", "category": "basic",
+    "question": "Which of the following cell types plays a primary role in neuroinflammation?\n以下の細胞タイプのうち、神経炎症において主要な役割を果たすのはどれですか。",
+    "choices": ["Astrocytes（アストロサイト）", "Oligodendrocytes（オリゴデンドラサイト）", "Microglia（ミクログリア）", "Schwann cells（シュワン細胞）"],
+    "answer": 2
+  },
+{
+    "id": "q064", "category": "basic",
+    "question": "Multiple sclerosis primarily involves damage to which of the following?\n多発性硬化症は主に以下のどの損傷を伴いますか？",
+    "choices": ["Axons（軸索）", "Neuronal cell bodies（神経細胞体）", "Myelin sheath（髄鞘）", "Synaptic vesicles（シナプス小胞）"],
+    "answer": 2
+  },
+{
+    "id": "q065", "category": "trivia",
+    "question": "There is a famous myth that humans only use a certain percentage of their brain capacity. What is that (incorrect) percentage often cited in movies like Lucy?\n人間は脳の特定の割合しか使っていないという有名な迷信があります。映画『LUCY/ルーシー』などでも引用されている、その（間違った）割合は何パーセントでしょう？",
+    "choices": ["1%", "10%", "50%", "100%"],
+    "answer": 1
+  },
+{
+    "id": "q066", "category": "intermediate",
+    "question": "What is the actual percentage of the human brain capacity being used?\n人間が使っている脳の本当の割合は何パーセントでしょう？",
+    "choices": ["25%", "50%", "75%", "100%"],
+    "answer": 3
+  },
+{
+    "id": "q067", "category": "advanced",
+    "question": "Which signaling molecule released by activated microglia most directly promotes neuroinflammation in the CNS?\n活性化したミクログリアから放出され、中枢神経系における神経炎症を最も直接的に促進するシグナル分子はどれでしょう。",
+    "choices": ["Brain-derived neurotrophic factor（BDNF / 脳由来神経栄養因子）", "Tumor necrosis factor-alpha（TNF-α / 腫瘍壊死因子α）", "Gamma-aminobutyric acid（GABA / γ-アミノ酪酸）", "Dopamine（ドーパミン）"],
+    "answer": 1
+  },
+{
+    "id": "q068", "category": "advanced",
+    "question": "Long-term potentiation (LTP) in the hippocampus is most strongly associated with which receptor?\n海馬における長期増強（LTP）と最も強く関連している受容体はどれでしょう。",
+    "choices": ["AMPA receptor（AMPA受容体）", "GABA_A receptor（GABA_A受容体）", "NMDA receptor（NMDA受容体）", "Metabotropic glutamate receptor（代謝型グルタミン酸受容体）"],
+    "answer": 2
+  },
+{
+    "id": "q069", "category": "intermediate",
+    "question": "Which pathological feature is most characteristic of Parkinson's disease?\nパーキンソン病に最も特徴的な病理学的所見はどれでしょう。",
+    "choices": ["Beta-amyloid plaques（βアミロイドプラーク）", "Neurofibrillary tangles（神経原線維変化）", "Loss of dopaminergic neurons in the substantia nigra（黒質におけるドーパミン作動性ニューロンの脱落）", "Demyelination of CNS axons（中枢神経系軸索の脱髄）"],
+    "answer": 2
+  },
+{
+    "id": "q070", "category": "intermediate",
+    "question": "Which brain region is most critical for fear conditioning?\n恐怖条件付けに最も重要な脳領域はどれでしょう。",
+    "choices": ["Prefrontal cortex（前頭前野）", "Hippocampus（海馬）", "Thalamus（視床）", "Amygdala（扁桃体）"],
+    "answer": 3
+  },
+{
+    "id": "q071", "category": "pro",
+    "question": "Which pathway carries voluntary motor commands from the cerebral cortex to the spinal cord?\n大脳皮質から脊髄へ随意運動命令を伝える経路はどれでしょう。",
+    "choices": ["Spinothalamic tract（脊髄視床路）", "Dorsal column–medial lemniscus pathway（後索‐内側毛帯路）", "Corticospinal tract（皮質脊髄路）", "Reticulospinal tract（網様体脊髄路）"],
+    "answer": 2
+  },
+{
+    "id": "q072", "category": "pro",
+    "question": "Which neurotransmitter is released by postganglionic sympathetic neurons?\n交感神経の節後ニューロンから放出される神経伝達物質はどれでしょう。",
+    "choices": ["Norepinephrine（ノルアドレナリン）", "GABA", "Glutamate（グルタミン酸）", "Acetylcholine（アセチルコリン）"],
+    "answer": 0
+  },
+{
+    "id": "q073", "category": "intermediate",
+    "question": "Which structure links the nervous system to the endocrine system?\n神経系と内分泌系を結びつける構造はどれでしょう。",
+    "choices": ["Pineal gland（松果体）", "Amygdala（扁桃体）", "Thalamus（視床）", "Hypothalamus（視床下部）"],
+    "answer": 3
+  },
+{
+    "id": "q074", "category": "trivia",
+    "question": "A patient can understand spoken language but speaks in short, effortful sentences lacking grammar. Which brain area is most likely affected?\n話し言葉の理解は保たれているが、文法に乏しく、努力的で短い発話しかできない患者がいる。障害されている可能性が高い脳領域はどれでしょう。",
+    "choices": ["Wernicke's area（ウェルニッケ野）", "Angular gyrus（角回）", "Broca's area（ブローカ野）", "Arcuate fasciculus（弓状束）"],
+    "answer": 2
+  },
+{
+    "id": "q075", "category": "trivia",
+    "question": "A patient shows intention tremor and difficulty with precise movements but has normal muscle strength. Which structure is most likely damaged?\n筋力は正常だが、動作が不正確で企図振戦がみられる患者がいる。最も障害されている可能性が高い構造はどれでしょう。",
+    "choices": ["Basal ganglia（大脳基底核）", "Cerebellum（小脳）", "Motor cortex（運動野）", "Spinal cord（脊髄）"],
+    "answer": 1
+  },
+{
+    "id": "q076", "category": "trivia",
+    "question": "A patient has dilated pupils, dry skin, and elevated heart rate. Which branch of the autonomic nervous system is overactive?\n瞳孔散大、皮膚乾燥、心拍数増加がみられる患者がいる。過剰に活動している自律神経系の分枝はどれでしょう。",
+    "choices": ["Parasympathetic（副交感神経）", "Enteric（腸管神経系）", "Somatic（体性神経系）", "Sympathetic（交感神経）"],
+    "answer": 3
+  },
+{
+    "id": "q077", "category": "basic",
+    "question": "Which of the following is the correct pair that forms the CNS (Central Nervous System)?\nCNS (中枢神経系)を構成する正しいペアは次のうちどれでしょう？",
+    "choices": ["Brain & Spinal cord (脳と脊髄)", "Motor nerve & Autonomic nerve (運動神経と自律神経)", "Spinal cord & Autonomic nerve (脊髄と自律神経)", "Brain & Motor nerve (脳と運動神経)"],
+    "answer": 0
+  },
+{
+    "id": "q078", "category": "basic",
+    "question": "How many lobes are in the cerebral cortex?\n大脳皮質には脳葉がいくつありますか？",
+    "choices": ["3", "4", "5", "6"],
+    "answer": 1
+  },
+{
+    "id": "q079", "category": "basic",
+    "question": "How many neurons does the human brain contain?\n人間の脳にはニューロンは何個あるでしょう？",
+    "choices": ["3 million（300万個）", "75 million（7500万個）", "86 billion（860億個）", "150 billion（1500億個）"],
+    "answer": 2
+  },
+{
+    "id": "q080", "category": "basic",
+    "question": "Which part of the brain is said to control logical decision making?\n論理的な思考を司ると言われている脳の部位はどこでしょう？",
+    "choices": ["Amygdala（扁桃体）", "Prefrontal Cortex（前頭前野）", "Hippocampus（海馬）", "Brainstem（脳幹）"],
+    "answer": 1
+  },
+{
+    "id": "q081", "category": "intermediate",
+    "question": "What does MRI stand for?\nMRIは何の略でしょう？",
+    "choices": ["Magnetic Resonance Imaging", "Motor Reflective Imaging", "Motivational Relative Imaging", "Movement Rotational Imaging"],
+    "answer": 0
+  },
+{
+    "id": "q082", "category": "intermediate",
+    "question": "Dark chocolate contains an amino acid called \"tryptophan\" which is a precursor of a few different neurotransmitters, including one that is considered a \"Happiness Hormone.\" Which of the following is a Happiness Hormone?\nダークチョコレートには「トリプトファン」というアミノ酸が含まれています。トリプトファンは「幸せホルモン」の分泌を助ける効果がありますが、次のうち、幸せホルモンと呼ばれているものはどれでしょう？",
+    "choices": ["Acetycholine（アセチルコリン）", "Norepinephirne（ノルエピネフリン）", "GABA", "Serotonin（セロトニン）"],
+    "answer": 3
+  },
+{
+    "id": "q083", "category": "intermediate",
+    "question": "What does ADHD stand for? This is a condition characterized by excessively inattentive, hyperactive, or impulsive behaviors.\n不注意・多動性・衝動性といった3つの特徴をもつADHDは何の略でしょう？",
+    "choices": ["Attention Dependent Hypoactivity Disorder", "Amygdala Dormant Hypothalamus Disorder", "Attention Deficit Hyperactivity Disorder", "Anterior Diencephalon Homogenity Disorder"],
+    "answer": 2
+  },
+{
+    "id": "q084", "category": "intermediate",
+    "question": "Where is Wernicke's area?\nウェルニッケ野はどこにあるでしょう？",
+    "choices": ["Frontal Lobe", "Temporal Lobe", "Occipital Lobe", "Parietal Lobe"],
+    "answer": 1
+  },
+{
+    "id": "q085", "category": "advanced",
+    "question": "This part of the eye around the fovea is critical for reading and driving. What's it's name?\n中心窩の周囲にあり、読書や運転に重要な役割を果たす眼の部分は何と呼ばれますか？",
+    "choices": ["Cornea（角膜）", "Optic nerve（視神経）", "Macula（黄斑）", "Retina（網膜）"],
+    "answer": 2
+  },
+{
+    "id": "q086", "category": "intermediate",
+    "question": "What part of the brain is most important for emotional learning?\n感情学習に最も重要な脳の部位はどれですか？",
+    "choices": ["Hippocampus（海馬）", "Cerebellum（小脳）", "Occipital lobe（後頭葉）", "Amygdala（扁桃体）"],
+    "answer": 3
+  },
+{
+    "id": "q087", "category": "intermediate",
+    "question": "What type of memory is responsible for our factual knowledge?\n私たちの事実に関する知識を担う記憶の種類はどれですか？",
+    "choices": ["Procedural memory（手続き記憶）", "Episodic memory（エピソード記憶）", "Semantic memory（意味記憶）", "Working memory（作業記憶）"],
+    "answer": 2
+  },
+{
+    "id": "q088", "category": "basic",
+    "question": "What term describes the brain's ability to change?\n脳が変化する能力を表す用語はどれですか？",
+    "choices": ["Neuroplasticity（神経可塑性）", "Neurogenesis（神経新生）", "Homeostasis（恒常性）", "Lateralization（側性化）"],
+    "answer": 0
+  },
+{
+    "id": "q089", "category": "intermediate",
+    "question": "The arrival of an action potential at an axonal bouton opens channels that let which ion in?\n活動電位が軸索終末（シナプス終末）に到達すると、どのイオンを流入させるチャネルが開きますか？",
+    "choices": ["Sodium (Na⁺)（ナトリウムイオン）", "Potassium (K⁺)（カリウムイオン）", "Calcium (Ca²⁺)（カルシウムイオン）", "Chloride (Cl⁻)（塩化物イオン）"],
+    "answer": 2
+  },
+{
+    "id": "q090", "category": "intermediate",
+    "question": "What's the name of the bundle of fibers that bridges the two brain hemispheres?\n左右の大脳半球をつなぐ神経線維の束は何と呼ばれますか？",
+    "choices": ["Thalamus（視床）", "Corpus callosum（脳梁）", "Brainstem（脳幹）", "Cerebellum（小脳）"],
+    "answer": 1
+  },
+{
+    "id": "q091", "category": "intermediate",
+    "question": "Which neurotransmitter deficit is observed in patients with Parkinson's Disease?\nパーキンソン病の患者で不足している神経伝達物質はどれですか？",
+    "choices": ["Serotonin（セロトニン）", "Dopamine（ドーパミン）", "Acetylcholine（アセチルコリン）", "Glutamate（グルタミン酸）"],
+    "answer": 1
+  },
+{
+    "id": "q092", "category": "advanced",
+    "question": "An increase in the number and efficiency of this receptor is the basic mechanism of LTP. What's the name of this receptor?\nこの受容体の数と効率の増加は、長期増強（LTP）の基本的なメカニズムです。この受容体の名前は何ですか？",
+    "choices": ["GABA_A receptor（GABA_A受容体）", "Dopamine D2 receptor（ドーパミンD2受容体）", "AMPA receptor（AMPA受容体）", "NMDA receptor（NMDA受容体）"],
+    "answer": 2
+  },
+{
+    "id": "q093", "category": "intermediate",
+    "question": "In humans with narcolepsy, a neuropeptide level is pathologically low. What's the name of this neuropeptide?\nナルコレプシーの患者では、ある神経ペプチドのレベルが病的に低下しています。その神経ペプチドの名前は何ですか？",
+    "choices": ["Substance P（サブスタンスP）", "Oxytocin（オキシトシン）", "Endorphin（エンドルフィン）", "Orexin（Hypocretin）（オレキシン／ヒポクレチン）"],
+    "answer": 3
+  },
+{
+    "id": "q094", "category": "advanced",
+    "question": "The circadian timing system is regulated by the ＿＿＿, a group of nerve cells that act as a master clock.\n概日リズム（サーカディアンリズム）は、体内の「マスタークロック」として働く神経細胞の集まりである＿＿＿によって調節されています。",
+    "choices": ["Suprachiasmatic nucleus（視交叉上核）", "Pineal gland（松果体）", "Hippocampus（海馬）", "Amygdala（扁桃体）"],
+    "answer": 0
+  },
+{
+    "id": "q095", "category": "intermediate",
+    "question": "What is the techinique that uses light to activate neurons?\n光を用いて神経細胞を活性化する技術は何と呼ばれますか？",
+    "choices": ["Chemogenetics（ケモジェネティクス）", "Optogenetics（オプトジェネティクス）", "Electrophysiology（電気生理学）", "Deep brain stimulation（脳深部刺激法）"],
+    "answer": 1
+  },
+{
+    "id": "q096", "category": "advanced",
+    "question": "What's the name of the enlargement on the axon's tip that actively explores the environment to find their precise location?\n軸索の先端にあり、周囲の環境を探りながら正確な位置を見つけるために働く膨らみは何と呼ばれますか？",
+    "choices": ["Dendritic spine（樹状突起スパイン）", "Axonal bouton（軸索終末）", "Growth cone（成長円錐）", "Node of Ranvier（ランビエ絞輪）"],
+    "answer": 2
+  },
+{
+    "id": "q097", "category": "advanced",
+    "question": "What do you call the loss of muscle tone causing the body to become temporarily paralyzed during REM sleep?\nレム睡眠時に筋緊張が失われ、体が一時的に麻痺する状態をなんと言うでしょう？",
+    "choices": ["Atonia （アトニア）", "Catatonia（カタトニア）", "Lobotomy（ロボトミー）", "Broca（ブローカ）"],
+    "answer": 0
+  },
+{
+    "id": "q098", "category": "basic",
+    "question": "Which part of the brain is activated by addictive substances such as nicotine and alcohol?\nニコチンやアルコールのような依存物質は脳の何を活性化させる？",
+    "choices": ["Reward System (報酬系)", "Pain System（痛覚系）", "Visual System（視覚系）", "Auditory System （聴覚系）"],
+    "answer": 0
+  },
+{
+    "id": "q099", "category": "intermediate",
+    "question": "What is the name of the bundle of nerves that connect the left and right hemispheres of the brain?\n左脳と右脳を繋げる神経繊維の太い束の名前はどれでしょう？",
+    "choices": ["Corpus Callosum（脳梁）", "Optic Tract（視神経線維束）", "Spinal Chord（脊髄）", "Cauda Equina（馬尾）"],
+    "answer": 0
+  },
+{
+    "id": "q100", "category": "trivia",
+    "question": "People who take MAO inhibitors are often told to avoid eating cheese. This is because cheese contains high amounts of what compound?\nMAO阻害剤を服用している人は、チーズを避けるよう言われます。これは、チーズに何が含まれているためでしょう？",
+    "choices": ["Ghrelin（グレリン）", "Tyramine（チラミン）", "Lycopene（リコピン）", "Caffeine（カフェイン）"],
+    "answer": 1
+  },
+{
+    "id": "q101", "category": "intermediate",
+    "question": "Damage to which structure most likely causes difficulty coordinating hand movements?\n手の動きをうまく調整できないのは、どの構造の損傷が原因ですか？",
+    "choices": ["Cerebellum（小脳）", "Amygdala（扁桃体）", "Hippocampus（海馬）", "Frontal Lobe（前頭葉）"],
+    "answer": 0
+  },
+{
+    "id": "q102", "category": "basic",
+    "question": "In a neuroscience experiment investigating if caffeine intake improves memory recall, what would caffeine intake be classified as...?\nカフェイン摂取が記憶の想起を改善するかどうかを調査する実験において、カフェイン摂取は何に分類されるだろうか？",
+    "choices": ["Confounding Variable（交絡変数）", "Dependent Variable（従属変数）", "Control Group（対照群）", "Independent Variable（独立変数）"],
+    "answer": 3
+  },
+{
+    "id": "q103", "category": "trivia",
+    "question": "Which historical figure proposed the theory that the heart was the seat of the soul and the brain functioned merely to cool the blood?\n心臓が魂の座であり、脳は単に血液を冷却する機能しか持たないという理論を提唱したのは、どの人物か？",
+    "choices": ["Camillo Golgi（カミッロ・ゴルジ）", "Paul Broca（ポール・ブローカ）", "Santiago Ramon y Cajal（サンティアゴ・ラモン・イ・カハール）", "Aristotle（アリストテレス）"],
+    "answer": 3
+  },
+{
+    "id": "q104", "category": "advanced",
+    "question": "In anatomical terminology, a structure that is more \"rostral\" in the human brain is located toward the:\n解剖学的用語において、ヒトの脳内でより「Rostral」に位置する構造は、以下のいずれの方向に向かって位置しているでしょう？",
+    "choices": ["Tail or back（後ろ）", "Top of the head（上）", "Midline of the brain（真ん中）", "Front or beak（前）"],
+    "answer": 3
+  },
+{
+    "id": "q105", "category": "intermediate",
+    "question": "A patient with damage to the temporal lobe is most likely to experience deficits in which of the following?\n側頭葉に損傷を受けた患者は、以下のうちどの障害を最も起こしやすいか？",
+    "choices": ["Motor control（運動機能）", "Somatosensory perception and touch（体性感覚と触覚）", "Visual perception（視覚）", "Auditory processing and memory（聴覚処理と記憶）"],
+    "answer": 3
+  },
+{
+    "id": "q106", "category": "trivia",
+    "question": "Which research design is most appropriate for studying an individual with a extremely rare brain condition that cannot be ethically induced in others?\n極めて稀な脳疾患を患う個人を研究対象とする場合、倫理的に他者に再現できない疾患について、どの研究デザインが最も適切か？",
+    "choices": ["Quasi-experimental Design（準実験的デザイン）", "Experimental Design（実験的デザイン）", "Case Study（ケーススタディ）", "Double-blind Study（二重盲検試験）"],
+    "answer": 2
+  },
+{
+    "id": "q107", "category": "intermediate",
+    "question": "Which plane of sectioning provides a view that divides the brain into the left and right hemispheres?\nどの断面平面が、脳を左右の半球に分けるでしょうか？",
+    "choices": ["Sagittal（サジタル断面）", "Coronal（コロナル断面）", "Horizontal（水平断面）", "Transverse（横断面）"],
+    "answer": 0
+  },
+{
+    "id": "q108", "category": "basic",
+    "question": "Which brain structure filters and relays sensory information to the cortex?\n感覚情報を大脳皮質に中継する構造はどれですか？",
+    "choices": ["Hypothalamus (視床下部)", "Brainstem (脳幹)", "Thalamus (視床)", "Amygdala (扁桃体)"],
+    "answer": 2
+  },
+{
+    "id": "q109", "category": "advanced",
+    "question": "What type of cells make up the myelin sheaths in the CNS?\n中枢神経系（CNS）のミエリン鞘を構成する細胞の種類はどれでしょう？",
+    "choices": ["Schwann Cells　（シュワン細胞）", "Oligodendrocytes（オリゴデンドロサイト）", "Microglia（ミクログリア）", "Radial Glia（放射状グリア細胞）"],
+    "answer": 1
+  },
+{
+    "id": "q110", "category": "basic",
+    "question": "Together with taste, what other sense allows us to distinguish thousands of different flavors?\n味覚に加えて、異なる風味の区別を助ける感覚は何でしょうか？",
+    "choices": ["Vision（視覚）", "Hearing（聴覚）", "Smell（嗅覚）", "Touch（触覚）"],
+    "answer": 2
+  },
+{
+    "id": "q111", "category": "basic",
+    "question": "What type of function does the basal ganglia coordinate?\n大脳基底核はどのような機能を調整しているでしょう？",
+    "choices": ["Movement（運動）", "Hearing（聴覚）", "Vision（視覚）", "Taste（味覚）"],
+    "answer": 0
+  },
+{
+    "id": "q112", "category": "basic",
+    "question": "What type of memory consists of facts, concepts, and cultural knowledge?\n事実や一般知識、概念、文化的知識などを含む記憶の種類は何でしょう？",
+    "choices": ["Episodic Memory（エピソード記憶）", "Semantic Memory（意味記憶）", "Motor Memory（運動記憶）", "Working Memory（作動記憶）"],
+    "answer": 1
+  },
+{
+    "id": "q113", "category": "intermediate",
+    "question": "What percentage of your body's energy is said to be used by the brain?\n脳は体全体のエネルギーの何パーセントを消費していると言われていますか？",
+    "choices": ["80", "50", "20", "2"],
+    "answer": 2
+  },
+{
+    "id": "q114", "category": "advanced",
+    "question": "Which gland is melatonin often produced and released from?\nメラトニンは主にどの腺で生成・分泌されるのでしょうか？",
+    "choices": ["Pineal Gland（松果腺）", "Adrenal Gland（副腎線）", "Thyroid Gland（甲状腺）", "Digestive Gland（消化腺）"],
+    "answer": 0
+  },
+{
+    "id": "q115", "category": "intermediate",
+    "question": "Which neurological condition is characterized by a failure of the nerve pathways that normally prevent muscle movement during dreaming, leading individuals to physically act out their dreams?\n夢を見ている間、通常は筋肉の動きを抑制している神経経路が機能しなくなることで、夢の内容を身体で再現してしまうという特徴を持つ神経疾患はどれでしょう？",
+    "choices": ["Narcolepsy（ナルコレプシー）", "Fatal Familial Insomnia（致死性家族性不眠症）", "Sleep Apnea（睡眠時無呼吸症候群）", "REM Sleep Behavior Disorder（レム睡眠行動障害）"],
+    "answer": 3
+  },
+{
+    "id": "q116", "category": "pro",
+    "question": "When a neuron generates an action potential, the cytoplasm becomes more positively charged in a process known as:\nニューロンが活動電位を発生させると、細胞質はより正に帯電するようになるが、この過程は次のように呼ばれます：",
+    "choices": ["Synaptic Pruning（シナプス刈り込み）", "Hyperpolarization（過分極）", "Saltatory Conduction（跳躍伝導）", "Depolarization（脱分極）"],
+    "answer": 3
+  },
+{
+    "id": "q117", "category": "advanced",
+    "question": "Schizophrenia is often categorized by 'positive' and 'negative' symptoms. Which of the following is considered a negative symptom of the disorder?\n統合失調症の症状は、「陽性」症状と「陰性」症状に分類されることが多いです。以下のうち、この疾患の陰性症状とされるものはどれですか？",
+    "choices": ["Hallucinations（幻覚）", "Confused Thinking（思考の混乱）", "Alogia（無言症）", "Delusions（妄想）"],
+    "answer": 2
+  },
+{
+    "id": "q118", "category": "intermediate",
+    "question": "Which part of the brain acts as the primary link between the nervous system and the endocrine system, overseeing homeostasis by regulating the pituitary gland?\n神経系と内分泌系の間の主要な接点として機能し、下垂体を調節することでホメオスタシスを維持している脳の部位はどこか。",
+    "choices": ["Hippocampus（海馬）", "Hypothalamus（視床下部）", "Basal Ganglia（大脳基底核）", "Cerebellum（小脳）"],
+    "answer": 1
+  },
+{
+    "id": "q119", "category": "intermediate",
+    "question": "Where is the main site in a nerve cell where signals from other cells are received?\n神経細胞において他の細胞からの信号を受け取る主な部位はどこか。",
+    "choices": ["Axons(軸索)", "Myelin sheath(髄鞘)", "Dendrites(樹状突起)", "Ranvier nodes(ランビエ絞跡)"],
+    "answer": 2
+  },
+{
+    "id": "q120", "category": "intermediate",
+    "question": "Which part of the brain primarily controls our habits?\n私たちの習慣を司っているのはどの部位でしょう？",
+    "choices": ["Hippocampus（海馬）", "Hypothalamus（視床下部）", "Basal Ganglia（大脳基底核）", "Cerebellum（小脳）"],
+    "answer": 2
+  },
+{
+    "id": "q121", "category": "basic",
+    "question": "The primary somatosensory cortex (S1), which processes touch and proprioception, is located in which lobe of the brain?\n触覚や固有受容感覚を処理する一次体性感覚皮質（S1）は、脳のどの脳葉に位置しているでしょう？",
+    "choices": ["Frontal Lobe（前頭葉）", "Parietal Lobe（頭頂葉）", "Temporal Lobe（側頭葉）", "Occipital Lobe（後頭葉）"],
+    "answer": 1
+  },
+{
+    "id": "q122", "category": "basic",
+    "question": "Which structure is known as the \"relay station\" of the brain, becuase it acts as the main gateway for motor and senosry signals?\n運動信号や感覚信号の主要な中継点として機能すると知られる構造はどれでしょう？",
+    "choices": ["Hippocampus（海馬）", "Thalamus（視床）", "Hypothalamus（視床下部）", "Amygdala（扁桃体）"],
+    "answer": 1
+  },
+{
+    "id": "q123", "category": "basic",
+    "question": "You are studying while listening to music -- this is multi-tasking, but the brain cannot truly conduct multiple tasks simultaneously. Which of the following describes what actually is happening?\nあなたは音楽を聴きながら勉強しています。これは「マルチタスキング」ですが、脳は実際に複数のタスクを同時にこなすことはできません。実際に起きていることを表す言葉はどれでしょう？",
+    "choices": ["Task Switching（タスクスイッチング）", "Multiple-single Task Conversion（複数ー単数タスク変換）", "Task Combination（タスク結合）", "Task Reduction（タスク削減）"],
+    "answer": 0
+  },
+{
+    "id": "q124", "category": "intermediate",
+    "question": "Which of the following correctly describes the brain waves found during slow-wave sleep (SWS)?\n次のうち、徐波睡眠（SWS）中に見られる脳波について正しく説明しているのはどれでしょう？",
+    "choices": ["Low frequency and low amplitude（低周波・低振幅）", "Low frequency and high amplitude（低周波・高振幅）", "High frequency and low amplitude（高周波・低振幅）", "High frequency and high amplitude（高周波・高振幅）"],
+    "answer": 1
+  },
+{
+    "id": "q125", "category": "intermediate",
+    "question": "Which of the following is a genetic disorder that causes jerky movements? This disorder is a result of a mutation in the HTT gene.\n次のうち、不随意運動を引き起こす遺伝性疾患はどれでしょう？この疾患は、HTT遺伝子の変異によって引き起こされます。",
+    "choices": ["Parkinson's Disease（パーキンソン病）", "Alzheimer's Disease（アルツハイマー病）", "Fragile X Syndrome（脆弱X症候群）", "Huntington's Disease（ハンチントン病）"],
+    "answer": 3
+  },
+{
+    "id": "q126", "category": "pro",
+    "question": "Receptors for pain-reducing compounds such as morphine and oxycodone are clustered in the...\n次のうち、モルヒネやオキシコドンなどの鎮痛物質の受容体が密集している部位はどこでしょう？",
+    "choices": ["Prefrontal Cortex（前頭前野）", "Orbitofrontal Cortex（眼窩前頭皮質）", "Periaqueductal Gray（中脳水道周囲灰白質）", "Visual Word Form Area（視覚性単語形状領野）"],
+    "answer": 2
+  },
+{
+    "id": "q127", "category": "intermediate",
+    "question": "Which of the following is a technique which uses strong magnets to activate specific regions of the brain? This technique is sometimes used for depression and obsessive-compusive disorder (OCD).\n次のうち、強力な磁石を用いて脳の特定の領域を刺激する技術はどれですか？この技術は、うつ病や強迫性障害（OCD）の治療に用いられることがあります。",
+    "choices": ["Transcranial Magnetic Stimulation（経頭蓋磁気刺激）", "Transcranial Direct Current Stimulation（経頭蓋電気刺激法）", "Microarray （ミクロアレイ）", "Magnetic Resonance Imaging （磁気共鳴画像）"],
+    "answer": 0
+  },
+{
+    "id": "q128", "category": "intermediate",
+    "question": "What do you call the gaps in myelin sheath that cover axons?\n軸索を覆うミエリン鞘にある隙間を何と呼びますか？",
+    "choices": ["Saltatory Conduction （跳躍伝導）", "Nodes of Ranvier（ランビエ絞輪）", "Neuropeptide Y（ニューロペプチドY）", "Oligodendrodytes（希突起膠細胞）"],
+    "answer": 1
+  },
+{
+    "id": "q129", "category": "intermediate",
+    "question": "About how many taste buds do humans have?\n人間にはおよそ何個の味蕾があるのでしょうか？",
+    "choices": ["500 ~ 1000", "2000 ~ 10,000", "15,000 ~ 20,000", "25,000 ~ 30,000"],
+    "answer": 1
+  },
+{
+    "id": "q130", "category": "basic",
+    "question": "Which neurotransmitter is primarily associated with reward and motivation?\n報酬や動機づけに主に関与する神経伝達物質はどれでしょう？",
+    "choices": ["Serotonin（セロトニン）", "Dopamine（ドーパミン）", "GABA（ギャバ）", "Acetylcholine（アセチルコリン）"],
+    "answer": 1
+  },
+{
+    "id": "q131", "category": "basic",
+    "question": "Which lobe of the brain is primarily responsible for vision?\n視覚を主に担当している脳葉はどれでしょう？",
+    "choices": ["Frontal Lobe（前頭葉）", "Parietal Lobe（頭頂葉）", "Temporal Lobe（側頭葉）", "Occipital Lobe（後頭葉）"],
+    "answer": 3
+  },
+{
+    "id": "q132", "category": "basic",
+    "question": "Which cortical layer primarily receives input from the thalamus?\n視床からの入力を主に受け取る大脳皮質の層はどれでしょう？",
+    "choices": ["Layer I（第I層：分子層）", "Layer II（第II層：外顆粒層）", "Layer IV（第IV層：内顆粒層）", "Layer VI（第VI層：多形細胞層）"],
+    "answer": 2
+  },
+{
+    "id": "q133", "category": "intermediate",
+    "question": "Damage to which structure results in an inability to form new declarative memories?\n新しい宣言的記憶を形成できなくなる障害は、どの構造の損傷によって起こりますか？",
+    "choices": ["Amygdala（扁桃体）", "Hippocampus（海馬）", "Basal Ganglia（大脳基底核）", "Cerebellum（小脳）"],
+    "answer": 1
+  },
+{
+    "id": "q134", "category": "basic",
+    "question": "Which neurotransmitter is primarily lost in Parkinson's disease?\nパーキンソン病で主に失われる神経伝達物質はどれでしょう？",
+    "choices": ["Serotonin（セロトニン）", "Dopamine（ドーパミン）", "Glutamate（グルタミン酸）", "Acetylcholine（アセチルコリン）"],
+    "answer": 1
+  },
+{
+    "id": "q135", "category": "basic",
+    "question": "Which artery supplies the medial surface of the frontal and parietal lobes?\n前頭葉および頭頂葉の内側面に血液を供給する動脈はどれでしょう？",
+    "choices": ["Middle Cerebral Artery（中大脳動脈）", "Anterior Cerebral Artery（前大脳動脈）", "Posterior Cerebral Artery（後大脳動脈）", "Basilar Artery（脳底動脈）"],
+    "answer": 1
+  },
+{
+    "id": "q136", "category": "intermediate",
+    "question": "Which of the following senses do not pass information through the thalamus before getting to the cerebral cortex?\n以下の感覚のうち、大脳皮質に到達する前に視床を経由しないものはどれか。",
+    "choices": ["Vision（視覚）", "Tase（味覚）", "Smell（嗅覚）", "Touch（触覚）"],
+    "answer": 2
+  },
+{
+    "id": "q137", "category": "basic",
+    "question": "Approximately how many neurons does a human brain have?\n人間の脳には、およそ何個のニューロンがあるでしょうか？",
+    "choices": ["1 Trillion（１兆）", "100 Billion（1000億）", "86 Billion（860億）", "50 Billion（500億）"],
+    "answer": 2
+  },
+{
+    "id": "q138", "category": "intermediate",
+    "question": "Which brain structure contains approximately 80% of the brain's total neurons despite only making up about 10% of its mass?\n脳の総重量の約10％しか占めていないにもかかわらず、脳全体のニューロンの約80％を含む脳の構造はどれでしょうか？",
+    "choices": ["Hippocampus（海馬）", "Cerebellum（小脳）", "Cerebral Cortex（大脳皮質）", "Brainstem（脳幹）"],
+    "answer": 1
+  },
+{
+    "id": "q139", "category": "intermediate",
+    "question": "Which imaging technique follows changes in brain activity by detecting differences in oxygen-rich and oxygen-poor blood flow?\n酸素を豊富に含む血液と酸素をほとんど含まない血液の流れの違いを検知することで、脳活動の変化を追跡する画像診断技術はどれでしょうか？",
+    "choices": ["EEG", "MEG", "TMS", "fMRI"],
+    "answer": 3
+  },
+{
+    "id": "q140", "category": "basic",
+    "question": "Which system in the brain is most active during times of rest, relaxation, and introspection?\n休息やリラックス、内省しているときに、脳の中で最も活発に活動しているシステムはどれでしょうか？",
+    "choices": ["Visual Processing Stream（視覚処理経路）", "Ventral Frontoparietal Network（腹側前頭頭頂ネットワーク）", "Reward System（報酬系）", "Default Mode Network（デフォルト・モード・ネットワーク）"],
+    "answer": 3
+  },
+{
+    "id": "q141", "category": "basic",
+    "question": "Which navigation-related cells fire in a roughly hexagonal pattern as an animal explores a wide-open environment?\n動物が広大な環境を探索する際、六角形のパターンで発火する、ナビゲーションに関連する細胞はどれですか？",
+    "choices": ["Grid Cells（格子細胞）", "Purkinje Cells（プルキンエ細胞）", "Place Cells（場所細胞）", "Astrocytes（アストロサイト）"],
+    "answer": 0
   }
 ]
