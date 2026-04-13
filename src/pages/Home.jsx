@@ -3,6 +3,11 @@ import Layout from '../components/Layout'
 import { useCountdown } from '../hooks/useCountdown'
 
 const ATTEMPT_KEY = 'sc_attempts_used'
+const NICKNAME_KEY = 'sc_nickname'
+
+function getSavedNickname() {
+  return localStorage.getItem(NICKNAME_KEY) || ''
+}
 
 function getAttemptsUsed() {
   return parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
@@ -10,6 +15,9 @@ function getAttemptsUsed() {
 
 const START = import.meta.env.VITE_CHALLENGE_START || '2026-04-20T00:00:00+09:00'
 const END   = import.meta.env.VITE_CHALLENGE_END   || '2026-05-11T23:59:59+09:00'
+
+const [nickname, setNickname] = useState(() => getSavedNickname())
+const [nickInput, setNickInput] = useState('')
 
 export default function Home() {
   const navigate = useNavigate()
@@ -26,7 +34,16 @@ export default function Home() {
   const toStart = useCountdown(START)
   const toEnd   = useCountdown(END)
   const cd      = isOpen ? toEnd : toStart
+  
+  const handleNicknameSubmit = () => {
+  const name = nickInput.trim()
+  if (!name) return
+    localStorage.setItem(NICKNAME_KEY, name)
+    setNickname(name)
+    navigate('/quiz')
+  }
 
+  
   return (
     <Layout>
       <div className="animate-fade-in space-y-10">
@@ -80,16 +97,43 @@ export default function Home() {
         {/* ── Start button ── */}
         {isOpen && (
           <div className="space-y-2">
-            <button
-              className="btn btn-primary btn-full text-base py-4"
-              onClick={() => navigate('/quiz')}
-              disabled={attemptsLeft === 0}
-            >
-              {attemptsLeft === 0 ? 'No attempts remaining' : `Start Challenge → (${attemptsLeft} attempt${attemptsLeft !== 1 ? 's' : ''} left)`}
-            </button>
-            <p className="text-center text-xs text-zinc-400">
-              15 questions · no skipping · 3 attempts total over the 3 weeks
-            </p>
+            {!nickname ? (
+  <div className="space-y-3">
+    <p className="text-sm font-medium text-zinc-700">Enter your nickname to begin</p>
+    <input
+      type="text"
+      value={nickInput}
+      onChange={e => setNickInput(e.target.value)}
+      onKeyDown={e => e.key === 'Enter' && handleNicknameSubmit()}
+      placeholder="Your nickname"
+      maxLength={30}
+      className="w-full border border-zinc-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-zinc-500 transition-all font-sans"
+    />
+    <button
+      className="btn btn-primary btn-full text-base py-4"
+      onClick={handleNicknameSubmit}
+      disabled={!nickInput.trim()}
+    >
+      Save &amp; Start Challenge →
+    </button>
+  </div>
+) : (
+  <div className="space-y-2">
+    <div className="flex items-center justify-between">
+      <p className="text-sm text-zinc-500">Playing as <span className="font-semibold text-zinc-900">{nickname}</span></p>
+    </div>
+    <button
+      className="btn btn-primary btn-full text-base py-4"
+      onClick={() => navigate('/quiz')}
+      disabled={attemptsLeft === 0}
+    >
+      {attemptsLeft === 0 ? 'No attempts remaining' : `Start Challenge → (${attemptsLeft} attempt${attemptsLeft !== 1 ? 's' : ''} left)`}
+    </button>
+  </div>
+)}
+<p className="text-center text-xs text-zinc-400">
+  15 questions · no skipping · 3 attempts total over the 3 weeks
+</p>
           </div>
         )}
 
