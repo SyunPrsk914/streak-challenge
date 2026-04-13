@@ -3,8 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 
 const ATTEMPT_KEY = 'sc_attempts_used'
+const NICKNAME_KEY = 'sc_nickname'
 
 export default function Result() {
+  const nickname = localStorage.getItem(NICKNAME_KEY) || 'Anonymous'
+  const attemptsUsed = parseInt(localStorage.getItem(ATTEMPT_KEY) || '0', 10)
   const { state }  = useLocation()
   const navigate   = useNavigate()
 
@@ -58,6 +61,7 @@ export default function Result() {
 
             {/* Headline */}
             <div className="space-y-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">{nickname} · Attempt {attemptsUsed + 1}</p>
               <p className="text-lg font-semibold text-zinc-900">{headline}</p>
               {sub && <p className="text-sm text-zinc-400">{sub}</p>}
             </div>
