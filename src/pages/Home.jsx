@@ -211,11 +211,12 @@ export default function Home() {
 }
 
 const RULES = [
-  'You have 3 attempts over the 3-week period. Your best result is your final score.',
-  '15 questions are loaded when you press Start. You must answer each question before moving on — no skipping.',
-  'One wrong answer ends your run immediately. Your streak at that point is your score.',
-  'If you answer all 15 correctly, you score a perfect streak of 15.',
-  'Do not close or refresh the tab mid-attempt — your run cannot be recovered.',
-  'Take a clear screenshot of your result screen and send it to the organiser.',
-  'Tiebreaks: compare 2nd and 3rd attempt streaks in order, then time taken on each attempt (faster = better).',
+  'You have 3 attempts over the 3-week period. All results will be recorded.',
+  'One wrong answer ends your run immediately! Your streak at that point is your score.',
+  'A streak of 15 questions is the maximum. Aim for perfect score!.',
+  'Higher streak = Higher rank! You can check the leaderboard from the button on top-right.',
+  'If multiple people has the same highest streak, the one with higher 2nd-best streak will win. If still the same, one with higher 3rd-best streak will win.',
+  'If all the streaks are the same, one that completed the highest streak faster will be the winner - try to get highest streak faster.',
+  'Do not close or refresh the tab mid-attempt — your run cannot be recovered in that case.',
+  'If any bug/glitch happens, please contact via IYNA discord. We can restore your attempt if the run was cut due to the system.',
 ]
