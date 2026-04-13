@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Layout from '../components/Layout'
 import { useEffect, useState } from 'react'
 import { parseSheetCSV, formatTime, compareUsers } from '../utils/ranking'
@@ -148,7 +147,11 @@ export default function Admin() {
           />
         </Section>
         <ResultsManager />
-        function ResultsManager() {
+        </div>
+      </Layout>
+    )
+  }
+  function ResultsManager() {
   const [players, setPlayers] = useState([])
   const [status, setStatus]   = useState('loading')
   const [removing, setRemoving] = useState(null) // { name, attemptNumber }
