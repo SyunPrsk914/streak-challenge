@@ -21,7 +21,7 @@ export default function Quiz() {
     return (
       <QuizShell>
         <div className="py-20 text-center text-sm text-zinc-500">
-          The challenge is not currently open.
+          チャレンジは行われていません。
         </div>
       </QuizShell>
     )
@@ -122,7 +122,7 @@ function Engine() {
         {/* ── Progress bar ── */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-medium text-zinc-400">
-            <span>Question {qIdx + 1} / 15</span>
+            <span>問題 {qIdx + 1} / 15</span>
             <span className="font-mono tabular-nums">{fmtMs(elapsed)}</span>
             <span className="flex items-center gap-1">
               <FireIcon />
@@ -175,14 +175,14 @@ function Engine() {
 
         {/* ── Feedback ── */}
         {phase === CORRECT && (
-          <p className="text-sm font-medium text-emerald-600 animate-fade-in">✓ Correct!</p>
+          <p className="text-sm font-medium text-emerald-600 animate-fade-in">✓ 正解!</p>
         )}
         {phase === PERFECT && (
-          <p className="text-sm font-medium text-emerald-600 animate-fade-in">🏆 Perfect — all 15 correct!</p>
+          <p className="text-sm font-medium text-emerald-600 animate-fade-in">🏆 パーフェクト — 15問すべて正解です!</p>
         )}
         {phase === WRONG && (
           <p className="text-sm font-medium text-rose-600 animate-fade-in">
-            ✗ Incorrect. The correct answer is highlighted above.
+            ✗ 残念！ 正解は上にハイライトされています.
           </p>
         )}
 
@@ -190,22 +190,22 @@ function Engine() {
         <div className="pt-1">
           {(phase === IDLE || phase === SELECTED) && (
             <button className="btn btn-primary btn-full" onClick={submit} disabled={phase !== SELECTED}>
-              Submit
+              送信
             </button>
           )}
           {phase === CORRECT && (
             <button className="btn btn-primary btn-full" onClick={next}>
-              Next Question →
+              次の問題 →
             </button>
           )}
           {phase === WRONG && (
             <button className="btn btn-outline btn-full" onClick={() => navigate('/')}>
-              Go Back to Home
+              ホームに戻る
             </button>
           )}
           {phase === PERFECT && (
             <button className="btn btn-primary btn-full" onClick={complete}>
-              Complete! 🎉
+              完了! 🎉
             </button>
           )}
         </div>
