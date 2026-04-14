@@ -33,11 +33,13 @@ function Engine() {
   const navigate = useNavigate()
 
   // Questions preloaded once on mount
-  const [questions]             = useState(() => pickQuestions(bank))
+  const QUIZ_SESSION_KEY = 'sc_quiz_in_progress'
+  const [questions] = useState(() => pickQuestions(bank))
   const [qIdx,    setQIdx]      = useState(0)
   const [selected, setSelected] = useState(null)   // index of chosen answer
   const [phase,   setPhase]     = useState(IDLE)
   const [streak,  setStreak]    = useState(0)
+  const streakRef               = useRef(0)
   const [elapsed, setElapsed]   = useState(0)      // ms, display only
 
   // ── Timer refs ────────────────────────────────────────────
@@ -65,7 +67,34 @@ function Engine() {
   }
 
   useEffect(() => { startTimer(); return () => clearInterval(intervalRef.current) }, []) // eslint-disable-line
+  
+useEffect(() => {
+  const nickname = localStorage.getItem('sc_nickname') || ''
+  sessionStorage.setItem(QUIZ_SESSION_KEY, JSON.stringify({ nickname, startedAt: Date.now() }))
+  return () => {
+    // Normal completion — clear the flag
+    sessionStorage.removeItem(QUIZ_SESSION_KEY)
+  }
+}, [])
 
+// Save result and redirect if page is about to be closed/refreshed
+useEffect(() => {
+  const handleUnload = () => {
+    const nickname = localStorage.getItem('sc_nickname') || ''
+    if (!nickname) return
+    // Use sendBeacon to fire-and-forget the save
+    // We store the abandoned attempt in localStorage for Home to pick up
+    const abandoned = {
+      nickname,
+      streak: streakRef.current,
+      timeMs: Date.now() - startRef.current - offsetRef.current,
+    }
+    localStorage.setItem('sc_abandoned', JSON.stringify(abandoned))
+  }
+  window.addEventListener('beforeunload', handleUnload)
+  return () => window.removeEventListener('beforeunload', handleUnload)
+}, [])
+  
   const q = questions[qIdx]
 
   // ── Select a choice ───────────────────────────────────────
@@ -83,6 +112,7 @@ function Engine() {
     if (selected === q.answer) {
       const newStreak = streak + 1
       setStreak(newStreak)
+      streakRef.current = newStreak
       if (newStreak === 15) {
         setPhase(PERFECT)
       } else {
@@ -92,7 +122,10 @@ function Engine() {
       setPhase(WRONG)
       const finalMs = Date.now() - startRef.current - offsetRef.current
       // Brief pause so player can see the correct answer highlighted
-      setTimeout(() => navigate('/result', { state: { streak, timeMs: finalMs, perfect: false } }), 2200)
+      sessionStorage.removeItem(QUIZ_SESSION_KEY)
+        setTimeout(() => navigate('/result', {
+          state: { streak, timeMs: finalMs, perfect: false }
+        }), 2200)
     }
   }
 
