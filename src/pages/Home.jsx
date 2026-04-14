@@ -64,7 +64,7 @@ export default function Home() {
       .single()
 
     if (existing) {
-      setNickError('This nickname is already taken — please choose another.')
+      setNickError('このニックネームは既に使用されています。')
       setSaving(false)
       return
     }
@@ -75,7 +75,7 @@ export default function Home() {
       .insert({ nickname: name })
 
     if (error) {
-      setNickError('Something went wrong — please try again.')
+      setNickError('エラーが発生しました。もう一度お試しください。')
       setSaving(false)
       return
     }
@@ -96,11 +96,11 @@ export default function Home() {
             Apr 20 – May 11, 2026
           </p>
           <h1 className="text-3xl font-semibold tracking-tight leading-tight">
-            IYNA QotD Streak Challenge
+            IYNA QotD 連続チャレンジ
           </h1>
           <p className="text-zinc-500 leading-relaxed text-sm max-w-sm">
-            Answer 15 questions correctly in a row. One mistake ends your run.
-            How far can you go?
+            15問連続で正解しましょう！1度間違えるとチャレンジ終了です。
+            あなたはどこまで続けられますか？
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
         {!hasEnded && (
           <div className="card p-6 space-y-4">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-zinc-400">
-              {isOpen ? 'Challenge closes in' : 'Challenge opens in'}
+              {isOpen ? 'チャレンジ終了まで' : 'チャレンジ開始まで'}
             </p>
             <div className="flex gap-5">
               {[
@@ -132,7 +132,7 @@ export default function Home() {
 
         {hasEnded && (
           <div className="card p-5 text-sm text-zinc-500 font-medium">
-            The challenge has ended — check the leaderboard!
+            チャレンジは終了しました。リーダーボードをチェック！
           </div>
         )}
 
@@ -141,13 +141,13 @@ export default function Home() {
           <div className="space-y-2">
             {!nickname ? (
               <div className="space-y-3">
-                <p className="text-sm font-medium text-zinc-700">Enter your nickname to begin</p>
+                <p className="text-sm font-medium text-zinc-700">ニックネームを入力して開始</p>
                 <input
                   type="text"
                   value={nickInput}
                   onChange={e => { setNickInput(e.target.value); setNickError('') }}
                   onKeyDown={e => e.key === 'Enter' && handleNicknameSubmit()}
-                  placeholder="Your nickname"
+                  placeholder="あなたのニックネーム"
                   maxLength={30}
                   disabled={saving}
                   className="w-full border border-zinc-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-zinc-500 transition-all font-sans disabled:opacity-50"
@@ -158,16 +158,16 @@ export default function Home() {
                   onClick={handleNicknameSubmit}
                   disabled={!nickInput.trim() || saving}
                 >
-                  {saving ? 'Saving…' : 'Save & Start Challenge →'}
+                  {saving ? 'セーブ中...' : 'セーブ & チャレンジ開始 →'}
                 </button>
               </div>
             ) : (
               <div className="space-y-2">
                 <p className="text-sm text-zinc-500">
-                  Playing as <span className="font-semibold text-zinc-900">{nickname}</span>
+                  プレイヤー名：<span className="font-semibold text-zinc-900">{nickname}</span>
                   {attemptsLeft !== null && (
                     <span className={`ml-2 text-xs font-medium ${attemptsLeft === 0 ? 'text-rose-500' : 'text-emerald-600'}`}>
-                      · {attemptsLeft} attempt{attemptsLeft !== 1 ? 's' : ''} remaining
+                      · 残り挑戦可能回数： {attemptsLeft} 回
                     </span>
                   )}
                 </p>
@@ -176,12 +176,12 @@ export default function Home() {
                   onClick={() => navigate('/quiz')}
                   disabled={attemptsLeft === 0 || attemptsLeft === null}
                 >
-                  {attemptsLeft === 0 ? 'No attempts remaining' : 'Start Challenge →'}
+                  {attemptsLeft === 0 ? '挑戦可能回数がすべて使われました' : 'チャレンジ開始 →'}
                 </button>
               </div>
             )}
             <p className="text-center text-xs text-zinc-400">
-              15 questions · no skipping · 5 attempts total over the 3 weeks
+              15問 · スキップなし · 3週間で最大5回チャレンジできます
             </p>
           </div>
         )}
@@ -194,7 +194,7 @@ export default function Home() {
 
         {/* ── Rules ── */}
         <div className="space-y-4 pt-2 border-t border-zinc-100">
-          <h2 className="text-sm font-semibold text-zinc-900 pt-4">Rules &amp; Notes</h2>
+          <h2 className="text-sm font-semibold text-zinc-900 pt-4">ルール &amp; 注意</h2>
           <ol className="space-y-3">
             {RULES.map((rule, i) => (
               <li key={i} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
@@ -211,12 +211,12 @@ export default function Home() {
 }
 
 const RULES = [
-  'You have 5 attempts over the 3-week period. All results will be recorded.',
-  'One wrong answer ends your run immediately! Your streak at that point is your score.',
-  'A streak of 15 questions is the maximum. Aim for perfect score!.',
-  'Higher streak = Higher rank! You can check the leaderboard from the button on top-right.',
-  'If multiple people has the same highest streak, the one with higher 2nd-best streak will win. If still the same, one with higher 3rd-best streak will win.',
-  'If all the streaks are the same, one that completed the highest streak faster will be the winner - try to get highest streak faster.',
-  'Do not close or refresh the tab mid-attempt — your run cannot be recovered in that case.',
-  'If any bug/glitch happens, please contact via IYNA discord. We can restore your attempt if the run was cut due to the system.',
+  '3週間で合計5回このチャレンジに挑戦できます。すべての結果は記録されます。',
+  '1度間違えるとそこで終了です！間違えた時点までの連続正答がスコアになります。',
+  '最大スコアは15問連続正解です。パーフェクトを目指しましょう！',
+  '連続記録が長ければ長いほど、順位も上がります！右上のボタンからリーダーボードを確認できます。',
+  '最高連続記録が同じ場合、2番目に長い連続記録が長いほうが上順位となります。それでも同じ場合は、同様に3番目、4番目、5番目の順に比べて決定されます。',
+  'すべての記録が同じ場合は、より早く最高記録を達成した人が上順位となります - できるだけ早く、正確に答えましょう！',
+  '挑戦中にタブを閉じたり更新したりしないでください。その場合、挑戦結果は復元できません。',
+  '不具合やエラーが発生した場合は、IYNAのDiscordまでご連絡ください。システムの不具合により挑戦が中断された場合、そのプレイデータを復元いたします。',
 ]
