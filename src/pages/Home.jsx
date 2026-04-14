@@ -116,7 +116,7 @@ export default function Home() {
             IYNA QotD 連続チャレンジ
           </h1>
           <p className="text-zinc-500 leading-relaxed text-sm max-w-sm">
-            15問連続で正解しましょう！1度間違えるとチャレンジ終了です。
+            15問連続で正解しましょう！1度間違えるとチャレンジ終了です。<br />
             あなたはどこまで続けられますか？
           </p>
         </div>
