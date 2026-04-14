@@ -198,11 +198,6 @@ function Engine() {
               次の問題 →
             </button>
           )}
-          {phase === WRONG && (
-            <button className="btn btn-outline btn-full" onClick={() => navigate('/')}>
-              ホームに戻る
-            </button>
-          )}
           {phase === PERFECT && (
             <button className="btn btn-primary btn-full" onClick={complete}>
               完了! 🎉
