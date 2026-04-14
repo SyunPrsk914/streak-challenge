@@ -134,7 +134,7 @@ const removeAttempt = async () => {
 
           <div className="space-y-4">
             {players.map(player => {
-              const attemptsLeft = 3 - player.attempts.length
+              const attemptsLeft = 5 - player.attempts.length
               return (
                 <div key={player.id} className="card p-4 space-y-3">
                   <div className="flex items-start justify-between gap-2">
