@@ -29,14 +29,14 @@ export function compareUsers(a, b) {
   const sb = rankSort(b.attempts)
 
   // Steps 1–3: compare streak values at each rank position
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     const va = sa[i]?.streak ?? -1
     const vb = sb[i]?.streak ?? -1
     if (va !== vb) return vb - va
   }
 
   // Steps 4–6: streaks all equal — compare fastest time for each streak rank
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     const streakVal = sa[i]?.streak
     if (streakVal == null) break
     const ta = fastestTimeForStreak(a.attempts, streakVal)
@@ -104,7 +104,7 @@ export function getTiebreakerInfo(player, allPlayers) {
   const sa = rankSort(player.attempts)
   const sb = rankSort(neighbor.attempts)
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     const va = sa[i]?.streak ?? -1
     const vb = sb[i]?.streak ?? -1
     if (va !== vb) {
@@ -116,7 +116,7 @@ export function getTiebreakerInfo(player, allPlayers) {
     }
   }
    
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     const streakVal = sa[i]?.streak
     if (streakVal == null) break
     const ta = fastestTimeForStreak(player.attempts, streakVal)
