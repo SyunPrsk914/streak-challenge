@@ -58,7 +58,7 @@ export default function Leaderboard() {
       <div className="animate-fade-in space-y-6">
 
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Leaderboard</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">リーダーボード</h1>
         </div>
 
         {status === 'loading' && (
@@ -107,7 +107,7 @@ function PlayerRow({ player, rank, tiebreaker }) {
       <div className="flex-1 min-w-0">
         <p className="font-semibold text-sm text-zinc-900 truncate">{player.name}</p>
         <p className="text-xs text-zinc-400 mt-0.5">
-          {player.attempts.length} attempt{player.attempts.length !== 1 ? 's' : ''}
+          挑戦回数：{player.attempts.length}回
         </p>
       </div>
       <div className="flex gap-2 shrink-0">
