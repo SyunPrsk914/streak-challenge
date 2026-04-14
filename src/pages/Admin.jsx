@@ -95,13 +95,16 @@ function ResultsManager() {
 
   useEffect(() => { load() }, []) // eslint-disable-line
 
-  const removeAttempt = async () => {
-    if (!removing) return
-    setWorking(true)
+const removeAttempt = async () => {
+  if (!removing) return
+  setWorking(true)
 
-    // Delete the attempt row
+  if (removing.type === 'person') {
+    // Deleting participant cascades to all their attempts (set up in schema)
+    await supabase.from('participants').delete().eq('id', removing.participantId)
+  } else {
+    // Delete the specific attempt
     await supabase.from('attempts').delete().eq('id', removing.attemptId)
-
     // Renumber subsequent attempts
     for (const a of removing.subsequent) {
       await supabase
@@ -109,11 +112,12 @@ function ResultsManager() {
         .update({ attempt_number: a.attempt - 1 })
         .eq('id', a.id)
     }
-
-    setRemoving(null)
-    setWorking(false)
-    await load()
   }
+
+  setRemoving(null)
+  setWorking(false)
+  await load()
+}
 
   return (
     <Section title="Results manager">
@@ -133,15 +137,27 @@ function ResultsManager() {
               const attemptsLeft = 3 - player.attempts.length
               return (
                 <div key={player.id} className="card p-4 space-y-3">
-                  <div>
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
                     <p className="font-semibold text-sm text-zinc-900">{player.name}</p>
-                    <p className="text-xs text-zinc-400">
-                      {player.attempts.length} / 3 used &nbsp;·&nbsp;
-                      <span className={attemptsLeft === 0 ? 'text-rose-500 font-medium' : 'text-emerald-600 font-medium'}>
-                        {attemptsLeft} remaining
-                      </span>
-                    </p>
-                  </div>
+                       <p className="text-xs text-zinc-400">
+                       {player.attempts.length} / 5 used &nbsp;·&nbsp;
+                       <span className={attemptsLeft === 0 ? 'text-rose-500 font-medium' : 'text-emerald-600 font-medium'}>
+                         {attemptsLeft} remaining
+                       </span>
+                     </p>
+                   </div>
+                   <button
+                     className="text-rose-400 hover:text-rose-600 text-xs font-medium underline shrink-0"
+                     onClick={() => setRemoving({
+                       type: 'person',
+                       name: player.name,
+                       participantId: player.id,
+                     })}
+                   >
+                     Delete person
+                   </button>
+                 </div>
 
                   {player.attempts.length === 0
                     ? <p className="text-xs text-zinc-400">No attempts yet.</p>
@@ -192,16 +208,24 @@ function ResultsManager() {
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4" style={{ background: 'rgba(0,0,0,0.4)' }}>
           <div className="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4">
             <h3 className="font-semibold text-zinc-900">
-              Remove attempt #{removing.attemptNum} for {removing.name}?
+              {removing.type === 'person'
+                ? `Delete ${removing.name} completely?`
+                : `Remove attempt #${removing.attemptNum} for ${removing.name}?`
+              }
             </h3>
             <p className="text-sm text-zinc-600 leading-relaxed">
-              This will permanently delete this attempt from the database
-              {removing.subsequent.length > 0
-                ? ` and renumber ${removing.name}'s subsequent attempts automatically.`
-                : '.'
+              {removing.type === 'person'
+                ? `This will permanently delete ${removing.name} and all their attempts. They will be able to re-register with the same nickname.`
+                : <>
+                    This will permanently delete this attempt from the database
+                    {removing.subsequent?.length > 0
+                      ? ` and renumber ${removing.name}'s subsequent attempts automatically.`
+                      : '.'
+                    }
+                    <br /><br />
+                    <strong>{removing.name}</strong> will gain 1 attempt back immediately.
+                  </>
               }
-              <br /><br />
-              <strong>{removing.name}</strong> will gain 1 attempt back immediately.
             </p>
             <div className="flex gap-2">
               <button
