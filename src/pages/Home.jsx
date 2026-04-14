@@ -40,14 +40,14 @@ export default function Home() {
       .eq('nickname', name)
       .single()
 
-    if (!participant) { setAttemptsLeft(3); return }
+    if (!participant) { setAttemptsLeft(5); return }
 
     const { count } = await supabase
       .from('attempts')
       .select('id', { count: 'exact', head: true })
       .eq('participant_id', participant.id)
 
-    setAttemptsLeft(Math.max(0, 3 - (count ?? 0)))
+    setAttemptsLeft(Math.max(0, 5 - (count ?? 0)))
   }
 
   const handleNicknameSubmit = async () => {
