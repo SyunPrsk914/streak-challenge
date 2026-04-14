@@ -34,17 +34,45 @@ export default function Home() {
   }, [nickname])
 
   const verifyAndLoad = async (name) => {
-  const { data } = await supabase
+  const { data: participant } = await supabase
     .from('participants')
     .select('id')
     .eq('nickname', name)
     .single()
 
-  if (!data) {
+  if (!participant) {
     localStorage.removeItem(NICKNAME_KEY)
     setNickname('')
     setAttemptsLeft(null)
     return
+  }
+
+  // Check for an abandoned attempt and save it before anything else
+  const abandonedRaw = localStorage.getItem('sc_abandoned')
+  if (abandonedRaw) {
+    try {
+      const abandoned = JSON.parse(abandonedRaw)
+      if (abandoned.nickname === name) {
+        // Count existing attempts
+        const { count } = await supabase
+          .from('attempts')
+          .select('id', { count: 'exact', head: true })
+          .eq('participant_id', participant.id)
+
+        const nextAttempt = (count ?? 0) + 1
+        if (nextAttempt <= 5) {
+          await supabase.from('attempts').insert({
+            participant_id: participant.id,
+            attempt_number: nextAttempt,
+            streak:         abandoned.streak ?? 0,
+            time_ms:        abandoned.timeMs ?? 0,
+          })
+        }
+      }
+    } catch (e) {
+      console.error('Failed to save abandoned attempt', e)
+    }
+    localStorage.removeItem('sc_abandoned')
   }
 
   loadAttemptsLeft(name)
