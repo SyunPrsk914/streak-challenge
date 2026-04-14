@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 
 import Home        from './pages/Home'
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/admin"       element={<Admin />} />
         <Route path="*"            element={<Navigate to="/" replace />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </StrictMode>
 )
