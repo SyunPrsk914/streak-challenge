@@ -11,7 +11,7 @@ export default function Layout({ children, narrow = true }) {
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-zinc-100">
         <div className="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
           <Link to="/" className="text-sm font-semibold tracking-tight hover:text-zinc-500 transition-colors">
-            Streak Challenge
+            IYNA QotD Streak Challenge
           </Link>
           <nav className="flex items-center gap-1">
             <Pill to="/"            active={pathname === '/'           }>Home</Pill>
@@ -29,7 +29,7 @@ export default function Layout({ children, narrow = true }) {
 
       {/* ── Footer ── */}
       <footer className="border-t border-zinc-100 py-5 text-center text-xs text-zinc-400 font-medium tracking-wide">
-        Streak Challenge &nbsp;·&nbsp; Apr 20 – May 11, 2026
+       IYNA Japan - QotD Streak Challenge &nbsp;·&nbsp; Apr 20 – May 11, 2026
       </footer>
 
     </div>
