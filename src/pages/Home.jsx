@@ -181,7 +181,7 @@ export default function Home() {
               </div>
             )}
             <p className="text-center text-xs text-zinc-400">
-              15 questions · no skipping · 3 attempts total over the 3 weeks
+              15 questions · no skipping · 5 attempts total over the 3 weeks
             </p>
           </div>
         )}
@@ -211,7 +211,7 @@ export default function Home() {
 }
 
 const RULES = [
-  'You have 3 attempts over the 3-week period. All results will be recorded.',
+  'You have 5 attempts over the 3-week period. All results will be recorded.',
   'One wrong answer ends your run immediately! Your streak at that point is your score.',
   'A streak of 15 questions is the maximum. Aim for perfect score!.',
   'Higher streak = Higher rank! You can check the leaderboard from the button on top-right.',
