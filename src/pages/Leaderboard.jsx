@@ -112,7 +112,7 @@ function PlayerRow({ player, rank, tiebreaker }) {
         </p>
       </div>
       <div className="flex gap-2 shrink-0">
-        {[0, 1, 2].map(i => {
+        {[0, 1, 2, 3, 4].map(i => {
           const a = player.attempts[i]
           if (!a) return <AttemptBox key={i} label={`#${i + 1}`} empty />
           return (
