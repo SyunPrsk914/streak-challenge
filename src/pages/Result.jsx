@@ -65,21 +65,21 @@ export default function Result() {
                    'bg-zinc-200'
 
   const headline =
-    perfect      ? '🏆 Perfect run!'                    :
-    streak === 0 ? '😬 Better luck next time.'           :
-    streak >= 10 ? `⚡ ${streak} in a row — great run!` :
-                   `🔥 ${streak} in a row!`
+    perfect      ? '🏆 完璧!'                    :
+    streak === 0 ? '😬 次のチャレンジで頑張りましょう'           :
+    streak >= 10 ? `⚡ ${streak} 連続 - すごい！` :
+                   `🔥 ${streak} 連続正解！`
 
   const sub =
-    perfect      ? 'All 15 questions answered correctly.' :
-    streak === 0 ? 'Everyone misses the first one.'       :
+    perfect      ? '15問すべて正解です！' :
+    streak === 0 ? '最初は誰でもミスします。'       :
                    ''
 
   return (
     <Layout>
       <div className="animate-slide-up space-y-8 max-w-md mx-auto">
 
-        <h1 className="text-xl font-semibold tracking-tight">Your result</h1>
+        <h1 className="text-xl font-semibold tracking-tight">あなたの結果</h1>
 
         <div id="result-card" className="card overflow-hidden">
           <div className={`h-1.5 w-full ${accentBar}`} />
@@ -87,21 +87,21 @@ export default function Result() {
 
             <div className="space-y-1">
               <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                {nickname} · Attempt {attemptNumber}
+                {nickname} · {attemptNumber}回目の挑戦
               </p>
               <p className="text-lg font-semibold text-zinc-900">{headline}</p>
               {sub && <p className="text-sm text-zinc-400">{sub}</p>}
             </div>
 
             <div className="grid grid-cols-2 divide-x divide-zinc-100 border border-zinc-100 rounded-xl overflow-hidden">
-              <StatCell label="Streak" value={`${streak}`} unit="/ 15" />
-              <StatCell label="Time"   value={fmtTime(timeMs)} mono />
+              <StatCell label="連続記録" value={`${streak}`} unit="/ 15" />
+              <StatCell label="時間"   value={fmtTime(timeMs)} mono />
             </div>
 
             <p className="text-xs text-zinc-400 leading-relaxed border-t border-zinc-100 pt-5">
               {saved
-                ? '✓ Result saved automatically.'
-                : '⏳ Saving result…'
+                ? '✓ セーブされました'
+                : '⏳ セーブ中...'
               }
             </p>
 
@@ -110,10 +110,10 @@ export default function Result() {
 
         <div className="flex flex-col gap-3">
           <button className="btn btn-primary btn-full" onClick={() => navigate('/')}>
-            Back to Home
+            ホームに戻る
           </button>
           <button className="btn btn-outline btn-full" onClick={() => navigate('/leaderboard')}>
-            View Leaderboard
+            リーダーボードを見る
           </button>
         </div>
 
