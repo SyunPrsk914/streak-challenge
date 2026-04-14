@@ -38,6 +38,7 @@ export default function Result() {
       .eq('participant_id', participant.id)
 
     const nextAttempt = (count ?? 0) + 1
+    if (nextAttempt > 5) return
     setAttemptNumber(nextAttempt)
 
     // Save attempt
