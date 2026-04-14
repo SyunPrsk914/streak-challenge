@@ -59,20 +59,19 @@ export default function Leaderboard() {
 
         <div className="space-y-1">
           <h1 className="text-2xl font-semibold tracking-tight">Leaderboard</h1>
-          <p className="text-sm text-zinc-400">Auto-refreshes every 60 s</p>
         </div>
 
         {status === 'loading' && (
-          <div className="py-16 text-center text-sm text-zinc-400 animate-pulse">Loading…</div>
+          <div className="py-16 text-center text-sm text-zinc-400 animate-pulse">ロード中...</div>
         )}
         {status === 'error' && (
           <div className="rounded-xl px-5 py-4 text-sm bg-amber-50 text-amber-800 border border-amber-200">
-            Could not load the leaderboard. Please try again shortly.
+            ロードできませんでした。もう一度お試しください。
           </div>
         )}
         {status === 'ok' && players.length === 0 && (
           <div className="rounded-xl px-5 py-4 text-sm bg-zinc-50 text-zinc-500 border border-zinc-200">
-            No results yet — check back soon!
+            まだ記録はありません...
           </div>
         )}
         {status === 'ok' && players.length > 0 && (
