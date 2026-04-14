@@ -30,9 +30,26 @@ export default function Home() {
   // Load attempt count from DB whenever nickname is known
   useEffect(() => {
     if (!nickname) { setAttemptsLeft(null); return }
-    loadAttemptsLeft(nickname)
+    verifyAndLoad(nickname)
   }, [nickname])
 
+  const verifyAndLoad = async (name) => {
+  const { data } = await supabase
+    .from('participants')
+    .select('id')
+    .eq('nickname', name)
+    .single()
+
+  if (!data) {
+    localStorage.removeItem(NICKNAME_KEY)
+    setNickname('')
+    setAttemptsLeft(null)
+    return
+  }
+
+  loadAttemptsLeft(name)
+}
+  
   const loadAttemptsLeft = async (name) => {
     const { data: participant } = await supabase
       .from('participants')
