@@ -32,7 +32,15 @@ export default function Quiz() {
 function Engine() {
   const navigate = useNavigate()
 
-  // Questions preloaded once on mount
+  // If there's an abandoned attempt in localStorage, this is a reload mid-quiz
+  // — redirect to Home immediately so it gets saved
+  useEffect(() => {
+    const abandoned = localStorage.getItem('sc_abandoned')
+    if (abandoned) {
+      navigate('/', { replace: true })
+    }
+  }, []) // eslint-disable-line
+  
   const QUIZ_SESSION_KEY = 'sc_quiz_in_progress'
   const [questions] = useState(() => pickQuestions(bank))
   const [qIdx,    setQIdx]      = useState(0)
