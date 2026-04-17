@@ -844,19 +844,19 @@
     "question": "Which navigation-related cells fire in a roughly hexagonal pattern as an animal explores a wide-open environment?\n動物が広大な環境を探索する際、六角形のパターンで発火する、ナビゲーションに関連する細胞はどれですか？",
     "choices": ["Grid Cells（格子細胞）", "Purkinje Cells（プルキンエ細胞）", "Place Cells（場所細胞）", "Astrocytes（アストロサイト）"],
     "answer": 0
-  }
+  },
 {
     "id": "q142", "category": "advanced",
     "question": "The medication used for stroke treatment, tPA, is usually recommended to be administered within how many hours after stroke occurence?\n脳卒中の治療に用いられる薬剤であるtPAは、通常、発症後何時間以内に投与することが推奨されていますか？",
     "choices": ["3 hours（3時間）", "5 hours（5時間）", "6 hours（6時間）", "8 hours（8時間）"],
     "answer": 0
-  }
+  },
 {
     "id": "q143", "category": "advanced",
     "question": "What do you call the inability to move, often seen in Parkinson's patients?\nパーキンソン病の患者によく見られる、体を動かせない状態を何と呼びますか？",
     "choices": ["Atonia", "Catatonia", "Akinesia", "Aplysia"],
     "answer": 2
-  }
+  },
 {
     "id": "q144", "category": "basic",
     "question": "Which type of dementia is the most common?\n最も一般的な認知症の種類はどれですか？",
