@@ -862,5 +862,11 @@
     "question": "Which type of dementia is the most common?\n最も一般的な認知症の種類はどれですか？",
     "choices": ["Lewy body dementia（レビー小体型認知症）", "Frontotemporal dementia（前頭側頭型認知症）", "Vascular dementia（血管性認知症）", "Alzheimer's disease（アルツハイマー病）"],
     "answer": 3
+  },
+{
+    "id": "q145", "category": "Intermediate",
+    "question": "What neurotransmitter is depleted in Parkinson's disease? \nパーキンソン病ではどの神経伝達物質が低下しますか？",
+    "choices": ["Serotonin (セロトニン)", "Dopamine (ドーパミン)", "Acetylcholine (アセチルコリン)", "GABA"],
+    "answer": 1
   }
 ]
